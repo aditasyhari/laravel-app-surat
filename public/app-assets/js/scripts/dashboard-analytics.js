@@ -3,9 +3,7 @@
 
 (function(window, document, $) {
    //Sample toast
-   setTimeout(function() {
-      M.toast({ html: "Hey! I am a toast." });
-   }, 2000);
+
 
    //Trending line chart
    var revenueLineChartCTX = $("#revenue-line-chart");

@@ -2,9 +2,7 @@
 //----------------------
 (function(window, document, $) {
    //Sample toast
-   setTimeout(function() {
-      M.toast({ html: "Hey! I am a toast." });
-   }, 2000);
+
 
    // Line chart with color shadow: Revenue for 2018 Chart
    var thisYearctx = document.getElementById("thisYearRevenue").getContext("2d");

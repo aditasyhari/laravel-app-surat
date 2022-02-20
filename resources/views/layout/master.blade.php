@@ -21,6 +21,7 @@ License: You must have a valid license purchased only from themeforest(the above
         @yield('title')
     </title>
     @include('layout.style')
+    @stack('style')
 </head>
 <!-- END: Head-->
 
@@ -65,6 +66,8 @@ License: You must have a valid license purchased only from themeforest(the above
     </footer>
 
     @include('layout.script')
+
+    @stack('js')
 </body>
 
 <!-- Mirrored from pixinvent.com/materialize-material-design-admin-template/html/ltr/vertical-modern-menu-template/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Mar 2019 16:34:49 GMT -->

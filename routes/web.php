@@ -16,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages.dashboard');
 });
+Route::get('surat-baru', function () {
+    return view('pages.surat.suratmasuk');
+});
+
+Route::get('managemen-anggota', function () {
+    return view('pages.managemen.index');
+});
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
