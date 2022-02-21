@@ -35,10 +35,13 @@
                     <div class="col s12">
                         <div class="card">
                             <div class="card-content">
-                                <h4 class="card-title">Data Anggota</h4>
+                                <h4 class="card-title">
+                                    Data Anggota
+                                    <a href="#" class="btn-floating btn-large waves-effect waves-light blue btn-small" title="Tambah Anggota"><i class="material-icons">add</i></a>
+                                </h4>
                                 <div class="row">
                                     <div class="col s12">
-                                        <table id="page-length-option" class="display">
+                                        <table id="page-length-option" class="">
                                             <thead>
                                                 <tr>
                                                     <th>Nama</th>
@@ -54,6 +57,7 @@
                                                     <td>System Architect</td>
                                                     <td>Edinburgh</td>
                                                     <td>61</td>
+                                                    <td>hdjs</td>
                                                 </tr>
                                             </tbody>
                                         </table>
