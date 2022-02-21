@@ -13,9 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.dashboard');
+Route::middleware('auth')->group(function() {
+    Route::get('/', function () {
+        return view('pages.dashboard');
+    });
 });
+
 
 Route::get('surat-baru', function () {
     return view('pages.surat.surat-baru.suratbaru');
@@ -42,6 +45,6 @@ Route::get('managemen-anggota', function () {
 });
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
