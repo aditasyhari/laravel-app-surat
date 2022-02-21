@@ -5,6 +5,9 @@
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/data-tables/css/select.dataTables.min.css')}}">
 @endpush
+@section('title')
+    Managemen Anggota
+@endsection
 @section('content')
 <div class="row">
     <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>

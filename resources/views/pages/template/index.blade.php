@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/data-tables/css/select.dataTables.min.css')}}">
 @endpush
 @section('title')
-    Surat Keluar
+    Template Surat
 @endsection
 @section('content')
 <div class="row">
@@ -16,11 +16,11 @@
         <div class="container">
             <div class="row">
                 <div class="col s10 m6 l6">
-                    <h5 class="breadcrumbs-title mt-0 mb-0">Surat Keluar</h5>
+                    <h5 class="breadcrumbs-title mt-0 mb-0">Template Surat</h5>
                     <ol class="breadcrumbs mb-0">
                         <li class="breadcrumb-item"><a href="index-2.html">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item active">Surat Keluar
+                        <li class="breadcrumb-item active">Template Surat
                         </li>
                     </ol>
                 </div>
@@ -37,7 +37,7 @@
                     <div class="col s12">
                         <div class="card">
                             <div class="card-content">
-                                <h4 class="card-title">Data Surat Keluar</h4>
+                                <h4 class="card-title">Data Template Surat</h4>
                                 <div class="row">
                                     <div class="col s12">
                                         <table id="page-length-option" class="display">
