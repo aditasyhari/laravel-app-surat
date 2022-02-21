@@ -17,6 +17,13 @@ Route::get('/', function () {
     return view('pages.dashboard');
 });
 
+Route::get('error-404', function () {
+    return view('error.404');
+});
+Route::get('error-500', function () {
+    return view('error.500');
+});
+
 Route::get('surat-baru', function () {
     return view('pages.surat.surat-baru.suratbaru');
 });
