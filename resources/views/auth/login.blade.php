@@ -47,20 +47,27 @@
                                     <h5 class="ml-4">Sign in</h5>
                                 </div>
                             </div>
-                            <form method="POST" action="{{ route('login') }}">
+
+                            @if ($message = Session::get('error'))
+                            <div class="card-panel red darken-2">
+                                <strong class="white-text">{{ $message }}</strong>
+                            </div>
+                            @endif
+
+                            <form method="POST" action="{{ url('post-login') }}">
                                 @csrf
                                 <div class="row margin">
                                     <div class="input-field col s12">
                                         <i class="material-icons prefix pt-2">person_outline</i>
-                                        <input id="email" type="text">
-                                        <label for="email" name="email" class="center-align">Email</label>
+                                        <input id="username" type="text" name="username" required>
+                                        <label for="username" class="center-align">Username (NIK / Email)</label>
                                     </div>
                                 </div>
                                 <div class="row margin">
                                     <div class="input-field col s12">
                                         <i class="material-icons prefix pt-2">lock_outline</i>
-                                        <input id="password" type="password">
-                                        <label for="password" name="password">Password</label>
+                                        <input id="password" type="password" name="password" required>
+                                        <label for="password">Password</label>
                                     </div>
                                 </div>
 

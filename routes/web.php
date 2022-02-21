@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('post-login', [AuthController::class, 'postLogin']);
+
 Route::middleware('auth')->group(function() {
     Route::get('/', function () {
         return view('pages.dashboard');
     });
 });
 
+Route::get('error-404', function () {
+    return view('error.404');
+});
+Route::get('error-500', function () {
+    return view('error.500');
+});
 
 Route::get('surat-baru', function () {
     return view('pages.surat.surat-baru.suratbaru');
