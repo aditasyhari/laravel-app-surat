@@ -35,7 +35,14 @@
         <ul class="dropdown-content" id="profile-dropdown">
           <li><a class="grey-text text-darken-1" href="user-profile-page.html"><i class="material-icons">person_outline</i> Profile</a></li>
           <li class="divider"></li>
-          <li><a class="grey-text text-darken-1" href="user-login.html"><i class="material-icons">keyboard_tab</i> Logout</a></li>
+          <li>
+            <a class="grey-text text-darken-1" href="#" onclick="document.getElementById('logout').submit()">
+              <i class="material-icons">keyboard_tab</i> Logout
+            </a>
+            <form id="logout" method="POST" action="{{ route('logout') }}">
+                  @csrf
+              </form>
+          </li>
         </ul>
       </div>
       <nav class="display-none search-sm">
