@@ -1,4 +1,7 @@
 @extends('layout.master')
+@section('title')
+    Dashboard
+@endsection
 @section('content')
 <div class="row">
     <div class="col s12">

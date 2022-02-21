@@ -16,8 +16,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages.dashboard');
 });
+
 Route::get('surat-baru', function () {
+    return view('pages.surat.surat-baru.suratbaru');
+});
+Route::get('non-template', function () {
+    return view('pages.surat.surat-baru.nontemplate');
+});
+
+
+
+Route::get('surat-masuk', function () {
     return view('pages.surat.suratmasuk');
+});
+Route::get('surat-keluar', function () {
+    return view('pages.surat.suratkeluar');
+});
+
+Route::get('template-surat', function () {
+    return view('pages.template.index');
 });
 
 Route::get('managemen-anggota', function () {
