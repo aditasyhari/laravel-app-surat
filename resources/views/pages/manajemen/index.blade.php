@@ -37,7 +37,7 @@
                             <div class="card-content">
                                 <h4 class="card-title">
                                     Data Anggota
-                                    <a href="{{ url() }}" class="btn-floating btn-large waves-effect waves-light blue btn-small" title="Tambah Anggota"><i class="material-icons">add</i></a>
+                                    <a href="{{ url('manajemen-anggota/tambah-anggota') }}" class="btn-floating btn-large waves-effect waves-light blue btn-small" title="Tambah Anggota"><i class="material-icons">add</i></a>
                                 </h4>
                                 <div class="row">
                                     <div class="col s12">
