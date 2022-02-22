@@ -43,10 +43,8 @@ Route::middleware('auth')->group(function() {
     });
 
     Route::middleware('admin')->group(function() {
-        Route::get('manajemen-anggota', function () {
-            return view('pages.manajemen.index');
-        });
         Route::get('manajemen-anggota', [UserController::class, 'index']);
+        Route::get('manajemen-anggota/tambah', [UserController::class, 'tambah']);
     });
 });
 
