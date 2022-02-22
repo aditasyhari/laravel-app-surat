@@ -44,13 +44,9 @@ Route::middleware('auth')->group(function() {
 
     });
 
-
     Route::middleware('admin')->group(function() {
         Route::get('manajemen-anggota', [UserController::class, 'index']);
-        // Route::get('manajemen-anggota/tambah', [UserController::class, 'tambah']);
-         Route::get('tambah-anggota', function () {
-            return view('pages.manajemen.tambah');
-        });
+        Route::get('manajemen-anggota/tambah-anggota', [UserController::class, 'tambah']);
         Route::get('edit-anggota', function () {
             return view('pages.manajemen.edit');
         });

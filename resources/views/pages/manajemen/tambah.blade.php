@@ -2,6 +2,9 @@
 @push('style')
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/dropify/css/dropify.min.css')}}">
 @endpush
+@section('title')
+    Tambah Anggota
+@endsection
 @section('content')
 <div class="row">
     <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
