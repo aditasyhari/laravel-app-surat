@@ -37,6 +37,11 @@ Route::middleware('auth')->group(function() {
     Route::get('surat-keluar', function () {
         return view('pages.surat.suratkeluar');
     });
+
+    Route::get('profile', function () {
+        return view('pages.profile.index');
+    });
+
     Route::prefix('template-surat')->group(function () {
         Route::get('daftar-template', function () {
             return view('pages.template.daftar');
