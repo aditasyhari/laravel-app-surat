@@ -7,7 +7,7 @@ Surat Baru
 
     <div class="col s12 m12 xl6">
         <div id="flight-card" class="card">
-            <a href="{{url('non-template')}}">
+            <a href="{{url('surat-baru/non-template')}}">
                 <div class="card-header light-blue accent-2">
                     <div class="card-title">
                         <h5 class="task-card-title mb-3 mt-0 white-text">Surat Non Template</h5>

@@ -37,7 +37,8 @@
                     <div class="col s12">
                         <div class="card">
                             <div class="card-content">
-                                <a class="waves-effect waves-light  btn gradient-45deg-light-blue-cyan box-shadow-none border-round mr-1 mb-1 right">Tambah</a>
+                                <a href="{{url('surat-masuk/tambah-surat')}}"
+                                class="waves-effect waves-light  btn gradient-45deg-light-blue-cyan box-shadow-none border-round mr-1 mb-1 right">Tambah</a>
                                 <h4 class="card-title">Data Surat Baru</h4>
                                 <div class="row">
                                     <div class="col s12">

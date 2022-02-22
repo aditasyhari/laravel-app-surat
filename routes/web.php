@@ -31,11 +31,17 @@ Route::middleware('auth')->group(function() {
     });
 
     Route::get('surat-masuk', function () {
-        return view('pages.surat.suratmasuk');
+        return view('pages.surat.surat-masuk.suratmasuk');
+    });
+    Route::get('surat-masuk/tambah-surat', function () {
+        return view('pages.surat.surat-masuk.tambah');
     });
 
     Route::get('surat-keluar', function () {
-        return view('pages.surat.suratkeluar');
+        return view('pages.surat.surat-keluar.suratkeluar');
+    });
+    Route::get('surat-keluar/tambah-surat', function () {
+        return view('pages.surat.surat-keluar.tambah');
     });
 
     Route::get('profile', function () {
