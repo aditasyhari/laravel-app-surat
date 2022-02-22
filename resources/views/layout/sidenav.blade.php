@@ -1,10 +1,6 @@
 <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out"
     data-menu="menu-navigation" data-collapsible="menu-accordion">
     <li class="bold">
-        <a class="waves-effect gradient-45deg-indigo-light-blue btn" href="{{url('surat-baru')}}">Surat Baru</a>
-    </li>
-    <br>
-    <li class="bold">
         <a class="collapsible-body {{ (request()->is('/*')) ? 'active' : '' }}" href="{{url('/')}}">
             <i class="material-icons">settings_input_svideo</i>
             <span class="menu-title" data-i18n="">Dashboard</span>
@@ -12,9 +8,15 @@
     </li>
 
     <li class="bold">
+        <a class="waves-effect waves-cyan {{ (request()->is('surat-baru')) ? 'active' : '' }}" href="{{url('surat-baru')}}">
+            <i class="material-icons">fiber_new</i>
+            <span class="menu-title" data-i18n="">Surat Baru</span>
+        </a>
+    </li>
+    <li class="bold">
         <a class="waves-effect waves-cyan {{ (request()->is('surat-masuk*')) ? 'active' : '' }}" href="{{url('surat-masuk')}}">
             <i class="material-icons">mail_outline</i>
-            <span class="menu-title" data-i18n="">Surat Baru</span>
+            <span class="menu-title" data-i18n="">Surat Masuk</span>
         </a>
     </li>
     <li class="bold">
@@ -23,11 +25,29 @@
             <span class="menu-title" data-i18n="">Surat Keluar</span>
         </a>
     </li>
-    <li class="bold">
-        <a class="waves-effect waves-cyan {{ (request()->is('template-surat*')) ? 'active' : '' }}" href="{{url('template-surat')}}">
+
+    <li class="active bold">
+        <a class="collapsible-header waves-effect waves-cyan {{ (request()->is('template-surat*')) ? 'active' : '' }}">
             <i class="material-icons">description</i>
             <span class="menu-title" data-i18n="">Template Surat</span>
         </a>
+        <div class="collapsible-body">
+            <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+
+                <li>
+                    <a class="collapsible-body" href="{{url('template-surat/daftar-template')}}" data-i18n="">
+                        <i class="material-icons">radio_button_unchecked</i>
+                        <span>Daftar Template</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="collapsible-body" href="{{url('template-surat/approv-template')}}" data-i18n="">
+                        <i class="material-icons">radio_button_unchecked</i>
+                        <span>Approv Template</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </li>
 
     <li class="active bold">

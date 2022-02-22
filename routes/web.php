@@ -37,10 +37,12 @@ Route::middleware('auth')->group(function() {
     Route::get('surat-keluar', function () {
         return view('pages.surat.suratkeluar');
     });
-
-    Route::get('template-surat', function () {
-        return view('pages.template.index');
+    Route::prefix('template-surat')->group(function () {
+        Route::get('daftar-template', function () {
+            return view('pages.template.daftar');
+        });
     });
+
 
     Route::middleware('admin')->group(function() {
         Route::get('manajemen-anggota', [UserController::class, 'index']);
