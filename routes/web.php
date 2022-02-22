@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::middleware('auth')->group(function() {
         Route::get('manajemen-anggota', function () {
             return view('pages.manajemen.index');
         });
+        Route::get('manajemen-anggota', [UserController::class, 'index']);
     });
 });
 

@@ -37,13 +37,14 @@
                             <div class="card-content">
                                 <h4 class="card-title">
                                     Data Anggota
-                                    <a href="#" class="btn-floating btn-large waves-effect waves-light blue btn-small" title="Tambah Anggota"><i class="material-icons">add</i></a>
+                                    <a href="{{ url() }}" class="btn-floating btn-large waves-effect waves-light blue btn-small" title="Tambah Anggota"><i class="material-icons">add</i></a>
                                 </h4>
                                 <div class="row">
                                     <div class="col s12">
                                         <table id="page-length-option" class="">
                                             <thead>
                                                 <tr>
+                                                    <th>Foto</th>
                                                     <th>Nama</th>
                                                     <th>Nik</th>
                                                     <th>Email</th>
@@ -53,6 +54,15 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
+                                                    <td>Tiger Nixon</td>
+                                                    <td>Tiger Nixon</td>
+                                                    <td>System Architect</td>
+                                                    <td>Edinburgh</td>
+                                                    <td>61</td>
+                                                    <td>hdjs</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tiger Nixon</td>
                                                     <td>Tiger Nixon</td>
                                                     <td>System Architect</td>
                                                     <td>Edinburgh</td>
