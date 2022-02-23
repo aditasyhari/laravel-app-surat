@@ -75,6 +75,11 @@
     </li>
     @if(Auth::user()->role == 'admin')
     <li class="bold">
+        <a class="waves-effect waves-cyan {{ (request()->is('klasifikasi*')) ? 'active' : '' }}" href="{{url('klasifikasi')}}">
+            <i class="material-icons">attachment</i><span class="menu-title" data-i18n="">Klasifikasi</span>
+        </a>
+    </li>
+    <li class="bold">
         <a class="waves-effect waves-cyan {{ (request()->is('manajemen-anggota*')) ? 'active' : '' }}" href="{{url('manajemen-anggota')}}">
             <i class="material-icons">face</i><span class="menu-title" data-i18n="">Manajemen Anggota</span>
         </a>

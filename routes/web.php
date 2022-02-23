@@ -64,6 +64,10 @@ Route::middleware('auth')->group(function() {
         Route::post('manajemen-anggota/tambah-anggota', [UserController::class, 'tambahData']);
         Route::put('manajemen-anggota/edit-anggota/{id}', [UserController::class, 'update']);
         Route::delete('manajemen-anggota/delete-anggota/{id}', [UserController::class, 'delete']);
+
+        Route::get('klasifikasi', function () {
+            return view('pages.klasifikasi.index');
+        });
     });
 });
 
