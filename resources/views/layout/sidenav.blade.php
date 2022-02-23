@@ -51,7 +51,7 @@
     </li>
 
     <li class="active bold">
-        <a class="collapsible-header waves-effect waves-cyan {{ (request()->is('arsip*')) ? 'active' : '' }}" href="#">
+        <a class="collapsible-header waves-effect waves-cyan {{ (request()->is('arsip-surat*')) ? 'active' : '' }}" href="#">
             <i class="material-icons">storage</i>
             <span class="menu-title" data-i18n="">Arsip Surat</span>
         </a>
@@ -59,15 +59,15 @@
             <ul class="collapsible collapsible-sub" data-collapsible="accordion">
 
                 <li>
-                    <a class="collapsible-body" href="#" data-i18n="">
+                    <a class="collapsible-body" href="{{url('arsip-surat/arsip-surat-masuk')}}" data-i18n="">
                         <i class="material-icons">radio_button_unchecked</i>
                         <span>Arsip Masuk</span>
                     </a>
                 </li>
                 <li>
-                    <a class="collapsible-body" href="#" data-i18n="">
+                    <a class="collapsible-body" href="{{url('arsip-surat/arsip-surat-keluar')}}" data-i18n="">
                         <i class="material-icons">radio_button_unchecked</i>
-                        <span>Arsip Surat Keluar</span>
+                        <span>Arsip Keluar</span>
                     </a>
                 </li>
             </ul>

@@ -54,6 +54,29 @@ Route::middleware('auth')->group(function() {
         Route::get('daftar-template', function () {
             return view('pages.template.daftar');
         });
+         Route::get('approv-template', function () {
+            return view('pages.template.approv');
+        });
+
+    });
+
+    Route::prefix('arsip-surat')->group(function () {
+        // masuk
+        Route::get('arsip-surat-masuk', function () {
+            return view('pages.arsip.arsip-masuk.index');
+        });
+        Route::get('tambah-arsip-masuk', function () {
+            return view('pages.arsip.arsip-masuk.tambah');
+        });
+
+        // keluar
+        Route::get('arsip-surat-keluar', function () {
+            return view('pages.arsip.arsip-keluar.index');
+        });
+
+        Route::get('tambah-arsip-keluar', function () {
+            return view('pages.arsip.arsip-keluar.tambah');
+        });
 
     });
 
