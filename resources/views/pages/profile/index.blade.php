@@ -34,8 +34,13 @@ Profile
                     <div class="col s12 m4 l3 user-section-negative-margin">
                         <div class="row">
                             <div class="col s12 center-align">
+                                @if (Auth::user()->foto == true)
                                 <img class="responsive-img circle z-depth-5" width="200"
-                                    src="{{asset('app-assets/images/user/12.jpg')}}" alt="">
+                                    src="{{asset('img/profile/'.Auth::user()->foto)}}" alt="">
+                                @else
+                                <img class="responsive-img circle z-depth-5" width="200"
+                                    src="{{asset('app-assets/images/gallery/35.png')}}" alt="">
+                                @endif
                                 <br>
                                 <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
                                 {{-- modal --}}
@@ -91,9 +96,9 @@ Profile
                                 <div class="card-content card-border-gray">
                                     <div class="row">
                                         <div class="col s12">
-                                            <h5>Suzanne Martin</h5>
-                                            <h6>suzana@gmail.com</h6>
-                                            <p>37321921990</p>
+                                            <h5>{{ Auth::user()->nama }}</h5>
+                                            <h6>{{ Auth::user()->email }}</h6>
+                                            <p>{{ Auth::user()->nik }}</p>
 
                                         </div>
                                     </div>
@@ -106,9 +111,14 @@ Profile
                         <div class="row mt-5">
                             <div class="col s12">
                                 <h6>Tanda Tangan</h6>
+                                @if (Auth::user()->foto == true)
                                 <img class="responsive-img card-border z-depth-2 mt-2"
-                                    src="{{asset('app-assets/images/gallery/post-3.png')}}" alt="">
+                                src="{{asset('img/ttd/'.Auth::user()->ttd)}}" alt="ttd">
+                                @else
+                                <img class="responsive-img card-border z-depth-2 mt-2"
+                                    src="{{asset('app-assets/images/misch/signature-scan.png')}}" alt="ttd">
 
+                                    @endif
                             </div>
                         </div>
 
