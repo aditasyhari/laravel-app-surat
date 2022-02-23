@@ -48,6 +48,8 @@ Route::middleware('auth')->group(function() {
         return view('pages.profile.index');
     });
 
+    Route::put('profile/update/{id}', [UserController::class, 'profileUpdate']);
+
     Route::prefix('template-surat')->group(function () {
         Route::get('daftar-template', function () {
             return view('pages.template.daftar');
