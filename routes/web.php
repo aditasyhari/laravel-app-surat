@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\KlasifikasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,7 @@ Route::middleware('auth')->group(function() {
     });
 
     Route::middleware('admin')->group(function() {
+        // manajemen anggota
         Route::get('manajemen-anggota', [UserController::class, 'index']);
         Route::get('manajemen-anggota/tambah-anggota', [UserController::class, 'tambah']);
         Route::get('manajemen-anggota/edit-anggota/{id}', [UserController::class, 'edit']);
@@ -88,9 +90,13 @@ Route::middleware('auth')->group(function() {
         Route::put('manajemen-anggota/edit-anggota/{id}', [UserController::class, 'update']);
         Route::delete('manajemen-anggota/delete-anggota/{id}', [UserController::class, 'delete']);
 
-        Route::get('klasifikasi', function () {
-            return view('pages.klasifikasi.index');
-        });
+        // klasifikasi
+        Route::get('klasifikasi', [KlasifikasiController::class, 'index']);
+        Route::get('klasifikasi/tambah-klasifikasi', [KlasifikasiController::class, 'tambah']);
+        Route::get('klasifikasi/edit-klasifikasi/{id}', [KlasifikasiController::class, 'edit']);
+        Route::post('klasifikasi/tambah-klasifikasi', [KlasifikasiController::class, 'tambahData']);
+        Route::put('klasifikasi/edit-klasifikasi/{id}', [KlasifikasiController::class, 'update']);
+        Route::delete('klasifikasi/delete-klasifikasi/{id}', [KlasifikasiController::class, 'delete']);
     });
 });
 
