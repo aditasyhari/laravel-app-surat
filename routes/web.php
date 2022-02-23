@@ -58,9 +58,10 @@ Route::middleware('auth')->group(function() {
     Route::middleware('admin')->group(function() {
         Route::get('manajemen-anggota', [UserController::class, 'index']);
         Route::get('manajemen-anggota/tambah-anggota', [UserController::class, 'tambah']);
-        Route::get('edit-anggota', function () {
-            return view('pages.manajemen.edit');
-        });
+        Route::get('manajemen-anggota/edit-anggota/{id}', [UserController::class, 'edit']);
+        Route::post('manajemen-anggota/tambah-anggota', [UserController::class, 'tambahData']);
+        Route::put('manajemen-anggota/edit-anggota/{id}', [UserController::class, 'update']);
+        Route::delete('manajemen-anggota/delete-anggota/{id}', [UserController::class, 'delete']);
     });
 });
 

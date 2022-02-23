@@ -4,6 +4,12 @@
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/data-tables/css/jquery.dataTables.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/data-tables/css/select.dataTables.min.css')}}">
+
+<style>
+    .img-table {
+        max-width: 70px;
+    }
+</style>
 @endpush
 @section('title')
     Manajemen Anggota
@@ -53,22 +59,23 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($user as $u)
                                                 <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>61</td>
-                                                    <td>hdjs</td>
+                                                    <td>
+                                                        <img class="img-table" src="{{ asset('image/profile/'.$u->foto) }}" alt="-">
+                                                    </td>
+                                                    <td>{{ $u->nama }}</td>
+                                                    <td>{{ $u->nik }}</td>
+                                                    <td>{{ $u->email }}</td>
+                                                    <td>
+                                                        <img class="img-table" src="{{ asset('image/ttd/'.$u->ttd) }}" alt="-">
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ url('manajemen-anggota/edit-anggota/'.$u->id_user) }}" class="btn-floating btn-large waves-effect waves-light cyan accent-3 btn-small" title="Edit Data"><i class="material-icons">edit</i></a>
+                                                        <a class="btn-floating btn-large waves-effect waves-light red btn-small" title="Hapus Data"><i class="material-icons">delete</i></a>
+                                                    </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>61</td>
-                                                    <td>hdjs</td>
-                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
