@@ -53,7 +53,7 @@ class UserController extends Controller
                 $ttd->move($destinationPath, $namaFile);
                 $input['ttd'] = "$namaFile";
             }
-            
+
             User::create($input);
 
             return back()->with('success', 'Data berhasil disimpan !');
@@ -104,7 +104,7 @@ class UserController extends Controller
                     File::delete(public_path($destinationPath . $user->ttd));
                 }
             }
-            
+
             $user->update($update);
 
             return back()->with('success', 'Data berhasil diperbarui !');
@@ -127,6 +127,68 @@ class UserController extends Controller
             $user->destroy($id);
 
             return back()->with('success', 'Data berhasil dihapus !');
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
+    // public function profile($id)
+    // {
+    //     try {
+    //         $usr = User::findOrFail($id);
+    //         return view('pages.profile.index', [
+    //             'usr' => $usr
+    //         ]);
+    //     }
+    //         catch (Exception $e) {
+    //         return view('error.500');
+    //     }
+    // }
+
+
+    public function profileUpdate(Request $request, $id)
+    {
+        try {
+            $usr = User::find($id);
+
+            $update = [
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'email' => $request->email,
+            ];
+
+            if ($request->hasFile('foto')) {
+                $foto = $request->file('foto');
+                $destinationPath = "image/profile/";
+                $namaFile = date('YmdHis').".".$foto->getClientOriginalExtension();
+                $foto->move($destinationPath, $namaFile);
+                $update['foto'] = "$namaFile";
+                if (
+                        File::exists(public_path($destinationPath . $usr->foto
+                        )
+                        )
+                    )
+                    {
+                        File::delete(public_path($destinationPath . $usr->foto
+                        )
+                    );
+                }
+            }
+
+            if ($request->hasFile('ttd')) {
+                $ttd = $request->file('ttd');
+                $destinationPath = "image/ttd/";
+                $namaFile = date('YmdHis').".".$ttd->getClientOriginalExtension();
+                $ttd->move($destinationPath, $namaFile);
+                $update['ttd'] = "$namaFile";
+                if (File::exists(public_path($destinationPath . $usr->ttd))) {
+                    File::delete(public_path($destinationPath . $usr->ttd));
+                }
+            }
+
+            $usr->update($update);
+
+            return back()->with('success', 'Data berhasil diperbarui !');
         } catch (Exception $e) {
             return view('error.500');
         }
