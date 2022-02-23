@@ -118,11 +118,11 @@ class UserController extends Controller
     {
         try {
             $user = User::find($id);
-            if (file_exists(public_path('image/profile/' . $user->foto))) {
-                unlink(public_path('image/profile/' . $user->foto));
+            if (File::exists(public_path("image/profile/" . $user->foto))) {
+                File::delete(public_path("image/profile/" . $user->foto));
             }
-            if (file_exists(public_path('image/ttd/' . $user->ttd))) {
-                unlink(public_path('image/ttd/' . $user->ttd));
+            if (File::exists(public_path("image/ttd/" . $user->ttd))) {
+                File::delete(public_path("image/ttd/" . $user->ttd));
             }
             $user->destroy($id);
 
