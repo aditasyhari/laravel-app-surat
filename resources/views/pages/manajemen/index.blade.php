@@ -45,6 +45,11 @@
                                     Data Anggota
                                     <a href="{{ url('manajemen-anggota/tambah-anggota') }}" class="btn-floating btn-large waves-effect waves-light blue btn-small" title="Tambah Anggota"><i class="material-icons">add</i></a>
                                 </h4>
+                                @if ($message = Session::get('success'))
+                                    <div class="card-panel green lighten-1">
+                                        <strong class="white-text">{{ $message }}</strong>
+                                    </div>
+                                @endif
                                 <div class="row">
                                     <div class="col s12">
                                         <table id="page-length-option" class="">
@@ -71,8 +76,20 @@
                                                         <img class="img-table" src="{{ asset('image/ttd/'.$u->ttd) }}" alt="-">
                                                     </td>
                                                     <td>
-                                                        <a href="{{ url('manajemen-anggota/edit-anggota/'.$u->id_user) }}" class="btn-floating btn-large waves-effect waves-light cyan accent-3 btn-small" title="Edit Data"><i class="material-icons">edit</i></a>
-                                                        <a class="btn-floating btn-large waves-effect waves-light red btn-small" title="Hapus Data"><i class="material-icons">delete</i></a>
+                                                        <div class="row">
+                                                            <div class="col s3">
+                                                                <a href="{{ url('manajemen-anggota/edit-anggota/'.$u->id_user) }}" class="btn-floating btn-large waves-effect waves-light cyan accent-3 btn-small" title="Edit Data"><i class="material-icons">edit</i></a>
+                                                            </div>
+                                                            <div class="col s3">
+                                                                <form method="POST" action="{{ url('manajemen-anggota/delete-anggota/'.$u->id_user) }}">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button class="btn-floating btn-large waves-effect waves-light red btn-small show_confirm" title="Hapus Data"><i class="material-icons">delete</i></button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+
+
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -88,6 +105,8 @@
         </div>
     </div>
 </div>
+
+
 @endsection
 @push('js')
 <script src="{{asset('app-assets/vendors/sparkline/jquery.sparkline.min.js')}}"></script>
@@ -96,4 +115,26 @@
 <script src="{{asset('app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('app-assets/vendors/data-tables/js/dataTables.select.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('app-assets/js/scripts/data-tables.js')}}" type="text/javascript"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+     $('.show_confirm').click(function(event) {
+          var form =  $(this).closest("form");
+          var name = $(this).data("name");
+          event.preventDefault();
+          swal({
+              title: `Apakah anda yakin menghapus data ini?`,
+              text: "Jika anda hapus, data akan hilang.",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            }
+          });
+      });
+</script>
 @endpush
