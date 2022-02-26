@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\ArsipSuratMasukController;
+use App\Http\Controllers\ArsipSuratKeluarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +94,7 @@ Route::middleware('auth')->group(function() {
             // arsip sk
             Route::get('sk', [ArsipSuratKeluarController::class, 'index']);
             Route::get('sk/tambah-arsip', [ArsipSuratKeluarController::class, 'tambah']);
+            Route::get('sk/detail-arsip/{id}', [ArsipSuratKeluarController::class, 'detail']);
             Route::post('sk/tambah-arsip', [ArsipSuratKeluarController::class, 'tambahData']);
             Route::delete('sk/delete-arsip/{id}', [ArsipSuratKeluarController::class, 'delete']);
         });

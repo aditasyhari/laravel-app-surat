@@ -15,9 +15,13 @@ Tambah Arsip Surat Keluar
                 <div class="col s10 m6 l6">
                     <h5 class="breadcrumbs-title mt-0 mb-0">Arsip Surat Keluar</h5>
                     <ol class="breadcrumbs mb-0">
-                        <li class="breadcrumb-item"><a href="index-2.html">Dashboard</a>
+                        <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item active">Tambah Arsip Surat Keluar
+                        <li class="breadcrumb-item">Arsip
+                        </li>
+                        <li class="breadcrumb-item">Surat Keluar
+                        </li>
+                        <li class="breadcrumb-item active">Tambah
                         </li>
                     </ol>
                 </div>
@@ -35,77 +39,80 @@ Tambah Arsip Surat Keluar
                                 <div class="card-title">
                                     <div class="row">
                                         <div class="col s12 m6 l10">
-                                            <h4 class="card-title">Form Input Tambah Arsip Surat Keluar</h4>
+                                            <h4 class="card-title">Form Tambah Arsip Surat Keluar</h4>
                                         </div>
                                         <div class="col s12 m6 l2">
                                         </div>
                                     </div>
                                 </div>
+                                @if ($message = Session::get('success'))
+                                    <div class="card-panel green lighten-1">
+                                        <strong class="white-text">{{ $message }}</strong>
+                                    </div>
+                                @endif
                                 <div id="html-view-validations">
-                                    <form class="formValidate0" id="formValidate0" method="get">
+                                    <form class="formValidate0" id="formValidate0" method="post" action="{{ url('arsip-surat/sk/tambah-arsip') }}" enctype="multipart/form-data">
+                                        @csrf
                                         <div class="row">
                                             <div class="col s12">
-                                                <label for="jenis">Jenis Surat</label>
-                                                <select class="error validate" id="jenis" name="jenis"
-                                                    aria-required="true" required>
-                                                    <option value="" disabled selected>Pilih
+                                                <label for="jenis">Klasifikasi Surat*</label>
+                                                <select class="error validate" id="jenis" name="klasifikasi" aria-required="true" required>
+                                                    <option disabled selected>Pilih
                                                     </option>
-                                                    <option value="1">Manager</option>
-                                                    <option value="2">Developer</option>
-                                                    <option value="3">Business</option>
+                                                    @foreach($klasifikasi as $k)
+                                                        <option value="{{ $k->nama }}" class="text-uppercase">{{ $k->nama }}</option>
+                                                    @endforeach
                                                 </select>
                                                 <div class="input-field">
                                                 </div>
                                             </div>
-                                            <div class="input-field col s12">
-                                                <label for="nosurat">No Surat</label>
-                                                <input class="validate" required aria-required="true" id="nosurat"
-                                                    name="nosurat" type="text">
-                                            </div>
-                                            <div class="input-field col s12">
-                                                <input type="date" class="datepicker" id="ts">
-                                                <label for="ts">Tanggal Surat</label>
-                                            </div>
 
                                             <div class="input-field col s12">
-                                                <label for="sd">Pengolah</label>
-                                                <input class="validate" required aria-required="true" id="sd"
-                                                    name="surat_dari" type="text">
-                                            </div>
-                                            <div class="input-field col s12">
-                                                <label for="perihal">Tujuan Surat</label>
-                                                <input class="validate" required aria-required="true" id="perihal"
-                                                    name="perihal" type="text">
-                                            </div>
-                                            <div class="col s12">
-                                                <label for="jenis">Dikirim ke</label>
-                                                <select class="error validate" id="jenis" name="jenis"
-                                                    aria-required="true" required>
-                                                    <option value="" disabled selected>Pilih
-                                                    </option>
-                                                    <option value="1">Adit</option>
-                                                    <option value="2">Asyhari</option>
-                                                    <option value="3">Reza</option>
-                                                </select>
+                                                <label for="nosurat">No Surat*</label>
+                                                <input class="validate" required aria-required="true" id="nosurat" name="no_sk" type="text">
                                                 <div class="input-field">
                                                 </div>
                                             </div>
+
                                             <div class="input-field col s12">
-                                                <label for="ket">Perihal</label>
-                                                <input class="validate" required aria-required="true" id="ket"
-                                                    name="ket" type="text">
-                                            </div>
-                                            <div class="input-field col s12">
-                                                <label for="ket">Konseptor dari</label>
-                                                <input class="validate" required aria-required="true" id="ket"
-                                                    name="ket" type="text">
+                                                <input type="date" class="datepicker" name="tgl_surat_fisik" id="ts" required>
+                                                <label for="ts">Tanggal Surat Fisik*</label>
+                                                <div class="input-field">
+                                                </div>
                                             </div>
 
                                             <div class="input-field col s12">
-                                                <label for="foto">Foto</label>
+                                                <label for="sd">Surat Dari*</label>
+                                                <input class="validate" required aria-required="true" id="sd" name="dari" type="text">
+                                                <div class="input-field">
+                                                </div>
+                                            </div>
+
+                                            <div class="input-field col s12">
+                                                <label for="sd">Tujuan Surat*</label>
+                                                <input class="validate" required aria-required="true" id="sd" name="tujuan_surat" type="text">
+                                                <div class="input-field">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="input-field col s12">
+                                                <label for="perihal">Perihal*</label>
+                                                <input class="validate" id="perihal" name="perihal" type="text" required aria-required="true">
+                                                <div class="input-field">
+                                                </div>
+                                            </div>
+
+                                            <div class="input-field col s12">
+                                                <label for="ket">Keterangan</label>
+                                                <input class="validate" id="ket" name="ket" type="text">
+                                                <div class="input-field">
+                                                </div>
+                                            </div>
+
+                                            <div class="input-field col s12">
+                                                <label for="foto">File*</label>
                                                 <br><br>
-                                                <input type="file" id="input-file-now" class="dropify"
-                                                    data-default-file="" />
+                                                <input type="file" id="input-file-now" class="dropify" data-default-file="" name="file" required/>
                                             </div>
 
                                             <div class="input-field col s12">
@@ -121,8 +128,7 @@ Tambah Arsip Surat Keluar
                         </div>
                     </div>
                 </div>
-            </div><!-- START RIGHT SIDEBAR NAV -->
-
+            </div>
 
         </div>
     </div>

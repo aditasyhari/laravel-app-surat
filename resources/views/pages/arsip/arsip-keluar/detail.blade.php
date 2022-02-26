@@ -11,7 +11,7 @@
 </style>
 @endpush
 @section('title')
-    Detail Arsip Surat Masuk
+    Detail Arsip Surat Keluar
 @endsection
 @section('content')
 <div class="row">
@@ -21,13 +21,13 @@
         <div class="container">
             <div class="row">
                 <div class="col s10 m6 l6">
-                    <h5 class="breadcrumbs-title mt-0 mb-0">Arsip Surat Masuk</h5>
+                    <h5 class="breadcrumbs-title mt-0 mb-0">Arsip Surat Keluar</h5>
                     <ol class="breadcrumbs mb-0">
                         <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a>
                         </li>
                         <li class="breadcrumb-item">Arsip
                         </li>
-                        <li class="breadcrumb-item">Surat Masuk
+                        <li class="breadcrumb-item">Surat Keluar
                         </li>
                         <li class="breadcrumb-item active">Detail
                         </li>
@@ -47,7 +47,7 @@
                                 <div class="card-title">
                                     <div class="row">
                                         <div class="col s12 m6 l10">
-                                            <h4 class="card-title">Detail Arsip Surat Masuk</h4>
+                                            <h4 class="card-title">Detail Arsip Surat Keluar</h4>
                                         </div>
                                         <div class="col s12 m6 l2">
                                         </div>
@@ -57,44 +57,39 @@
                                     <div class="row">
                                         <div class="col s6 mb-20">
                                             <label for="jenis">Klasifikasi Surat</label>
-                                            <h6>{{ $sm->klasifikasi }}</h6>
+                                            <h6>{{ $sk->klasifikasi }}</h6>
                                         </div>
 
                                         <div class="col s6 mb-20">
                                             <label for="nosurat">No Surat</label>
-                                            <h6 class="text-uppercase">{{ $sm->no_sm }}</h6>
-                                        </div>
-
-                                        <div class="col s6 mb-20">
-                                            <label for="tt">Tanggal Surat Diterima</label>
-                                            <h6>{{ $sm->tgl_surat_diterima }}</h6>
+                                            <h6 class="text-uppercase">{{ $sk->no_sk }}</h6>
                                         </div>
 
                                         <div class="col s6 mb-20">
                                             <label for="ts">Tanggal Surat Fisik</label>
-                                            <h6>{{ $sm->tgl_surat_fisik }}</h6>
+                                            <h6>{{ $sk->tgl_surat_fisik }}</h6>
                                         </div>
 
                                         <div class="col s6 mb-20">
                                             <label for="sd">Surat Dari</label>
-                                            <h6>{{ $sm->dari }}</h6>
+                                            <h6>{{ $sk->dari }}</h6>
                                         </div>
 
                                         <div class="col s6 mb-20">
                                             <label for="sd">Tujuan Surat</label>
-                                            <h6>{{ $sm->tujuan_surat }}</h6>
+                                            <h6>{{ $sk->tujuan_surat }}</h6>
                                         </div>
 
                                         <div class="col s6 mb-20">
                                             <label for="perihal">Perihal</label>
-                                            <h6>{{ $sm->perihal }}</h6>
+                                            <h6>{{ $sk->perihal }}</h6>
                                         </div>
 
                                         <div class="col s6 mb-20">
                                             <label for="ket">Keterangan</label>
                                             <h6>
-                                                @if($sm->ket != null)
-                                                    {{ $sm->ket }}
+                                                @if($sk->ket != null)
+                                                    {{ $sk->ket }}
                                                 @else
                                                     -
                                                 @endif
@@ -102,7 +97,7 @@
                                         </div>
 
                                         <div class="col s12">
-                                            <a href="{{ asset('arsip/surat-masuk/'.$sm->file) }}" target="_blank" class="btn waves-effect waves-light">
+                                            <a href="{{ asset('arsip/surat-keluar/'.$sk->file) }}" target="_blank" class="btn waves-effect waves-light">
                                                 Lihat File
                                             </a>
                                         </div>

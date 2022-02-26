@@ -22,7 +22,7 @@ class ArsipSk extends Migration
             $table->string('dari');
             $table->string('tujuan_surat');
             $table->string('email_tujuan')->nullable();
-            $table->string('perihal')->nullable();
+            $table->string('perihal');
             $table->string('ket')->nullable();
             $table->string('file');
             $table->timestamps();

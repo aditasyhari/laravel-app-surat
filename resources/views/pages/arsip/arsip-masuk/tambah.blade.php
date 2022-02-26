@@ -88,10 +88,7 @@ Tambah Arsip Surat Masuk
                                                 <label for="sd">Surat Dari*</label>
                                                 <input class="validate" required aria-required="true" id="sd" name="dari" type="text">
                                             </div>
-                                            <!-- <div class="input-field col s12">
-                                                <label for="sd">Tujuan Surat</label>
-                                                <input class="validate" required aria-required="true" id="sd" name="tujuan_surat" type="text">
-                                            </div> -->
+
                                             <div class="col s12">
                                                 <label for="jenis">Tujuan Surat*</label>
                                                 <select class="error validate" id="tujuan" name="id_user" aria-required="true" required>
@@ -105,8 +102,8 @@ Tambah Arsip Surat Masuk
                                                 </div>
                                             </div>
                                             <div class="input-field col s12">
-                                                <label for="perihal">Perihal</label>
-                                                <input class="validate" id="perihal" name="perihal" type="text">
+                                                <label for="perihal">Perihal*</label>
+                                                <input class="validate" id="perihal" name="perihal" type="text" required aria-required="true">
                                             </div>
                                             <div class="input-field col s12">
                                                 <label for="ket">Keterangan</label>

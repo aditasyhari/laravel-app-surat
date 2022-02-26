@@ -51,13 +51,11 @@ class ArsipSuratMasukController extends Controller
             $user = User::find($request->id_user);
             $input['tujuan_surat'] = $user->nama;
 
-            if ($request->hasFile('file')) {
-                $file = $request->file('file');
-                $destinationPath = 'arsip/surat-masuk/';
-                $namaFile = date('YmdHis')."_arsip_sm.".$file->getClientOriginalExtension();
-                $file->move($destinationPath, $namaFile);
-                $input['file'] = "$namaFile";
-            }
+            $file = $request->file('file');
+            $destinationPath = 'arsip/surat-masuk/';
+            $namaFile = date('YmdHis')."_arsip_sm.".$file->getClientOriginalExtension();
+            $file->move($destinationPath, $namaFile);
+            $input['file'] = "$namaFile";
 
             ArsipSuratMasuk::create($input);
 
