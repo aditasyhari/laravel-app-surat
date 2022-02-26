@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Exception;
-use Validator;
 use File;
 
 class UserController extends Controller

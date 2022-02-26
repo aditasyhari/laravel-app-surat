@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SuratController;
 use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\ArsipSuratMasukController;
 use App\Http\Controllers\ArsipSuratKeluarController;
@@ -33,12 +34,7 @@ Route::middleware('auth')->group(function() {
         return view('pages.surat.surat-baru.nontemplate');
     });
 
-    Route::get('surat-masuk', function () {
-        return view('pages.surat.surat-masuk.suratmasuk');
-    });
-    Route::get('surat-masuk/tambah-surat', function () {
-        return view('pages.surat.surat-masuk.tambah');
-    });
+    Route::get('surat-masuk', [SuratController::class, 'suratMasuk']);
 
     Route::get('surat-keluar', function () {
         return view('pages.surat.surat-keluar.suratkeluar');
@@ -62,8 +58,6 @@ Route::middleware('auth')->group(function() {
         });
 
     });
-
-    
 
     Route::middleware('admin')->group(function() {
         // manajemen anggota

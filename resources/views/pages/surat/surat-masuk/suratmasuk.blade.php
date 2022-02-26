@@ -16,11 +16,11 @@
         <div class="container">
             <div class="row">
                 <div class="col s10 m6 l6">
-                    <h5 class="breadcrumbs-title mt-0 mb-0">Surat Baru</h5>
+                    <h5 class="breadcrumbs-title mt-0 mb-0">Surat Masuk</h5>
                     <ol class="breadcrumbs mb-0">
                         <li class="breadcrumb-item"><a href="index-2.html">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item active">Surat Baru
+                        <li class="breadcrumb-item active">Surat Masuk
                         </li>
                     </ol>
                 </div>
@@ -37,41 +37,33 @@
                     <div class="col s12">
                         <div class="card">
                             <div class="card-content">
-                                <a href="{{url('surat-masuk/tambah-surat')}}"
-                                class="waves-effect waves-light  btn gradient-45deg-light-blue-cyan box-shadow-none border-round mr-1 mb-1 right">Tambah</a>
-                                <h4 class="card-title">Data Surat Baru</h4>
+                                <h4 class="card-title">Data Surat Masuk</h4>
                                 <div class="row">
                                     <div class="col s12">
                                         <table id="page-length-option" class="display">
                                             <thead>
                                                 <tr>
                                                     <th>Nomor Surat</th>
-                                                    <th>Perihal Surat</th>
+                                                    <th>Perihal</th>
                                                     <th>Klasifikasi</th>
                                                     <th>Pengirim</th>
-                                                    <th>Tanggal Surat</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($sm as $m)
                                                 <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>61</td>
-                                                    <td>2011/04/25</td>
+                                                    <td>{{ $m->no_sm }}</td>
+                                                    <td>{{ $m->no_perihal }}</td>
+                                                    <td>{{ $m->klasifikasi }}</td>
+                                                    <td>{{ $m->dari }}</td>
                                                     <td>
-                                                        <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-amber-amber" title="detail">
-                                                            <i class="material-icons">details</i>
-                                                        </a>
-                                                        <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-green-teal" title="edit">
-                                                            <i class="material-icons">edit</i>
-                                                        </a>
-                                                        <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-purple-deep-orange" title="delete">
-                                                            <i class="material-icons">delete</i>
+                                                        <a class="mb-6 waves-effect waves-light gradient-45deg-amber-amber" title="Lihat Detail">
+                                                            Lihat Detail
                                                         </a>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
