@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function() {
         return view('pages.dashboard');
     });
 
+    // surat baru
     Route::get('surat-baru', function () {
         return view('pages.surat.surat-baru.suratbaru');
     });
@@ -30,6 +31,13 @@ Route::middleware('auth')->group(function() {
     Route::get('surat-baru/non-template', function () {
         return view('pages.surat.surat-baru.nontemplate');
     });
+    Route::get('surat-baru/surat-template', function () {
+        return view('pages.surat.surat-baru.template');
+    });
+    Route::get('surat-baru/surat-template/buat-surat', function () {
+        return view('pages.surat.surat-baru.buatsurat');
+    });
+    // end surat baru
 
     Route::get('surat-masuk', function () {
         return view('pages.surat.surat-masuk.suratmasuk');
