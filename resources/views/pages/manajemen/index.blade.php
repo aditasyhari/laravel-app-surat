@@ -122,7 +122,7 @@
           var name = $(this).data("name");
           event.preventDefault();
           swal({
-              title: `Apakah anda yakin menghapus data ini?`,
+              title: `Anda yakin menghapus data ini?`,
               text: "Jika anda hapus, data akan hilang.",
               icon: "warning",
               buttons: true,

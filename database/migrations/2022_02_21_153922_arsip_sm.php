@@ -20,11 +20,12 @@ class ArsipSm extends Migration
             $table->date('tgl_surat_diterima');
             $table->date('tgl_surat_fisik');
             $table->string('klasifikasi');
+            $table->string('dari');
             $table->string('tujuan_surat');
             $table->unsignedBigInteger('id_user');
-            $table->string('email_tujuan');
+            $table->string('email_tujuan')->nullable();
             $table->string('perihal');
-            $table->string('ket');
+            $table->string('ket')->nullable();
             $table->string('file');
             $table->boolean('read')->default(0);
             $table->timestamps();

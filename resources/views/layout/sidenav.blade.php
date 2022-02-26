@@ -59,13 +59,13 @@
             <ul class="collapsible collapsible-sub" data-collapsible="accordion">
 
                 <li>
-                    <a class="collapsible-body" href="{{url('arsip-surat/arsip-surat-masuk')}}" data-i18n="">
+                    <a class="collapsible-body" href="{{url('arsip-surat/sm')}}" data-i18n="">
                         <i class="material-icons">radio_button_unchecked</i>
                         <span>Arsip Masuk</span>
                     </a>
                 </li>
                 <li>
-                    <a class="collapsible-body" href="{{url('arsip-surat/arsip-surat-keluar')}}" data-i18n="">
+                    <a class="collapsible-body" href="{{url('arsip-surat/sk')}}" data-i18n="">
                         <i class="material-icons">radio_button_unchecked</i>
                         <span>Arsip Keluar</span>
                     </a>

@@ -17,16 +17,15 @@ class ArsipSk extends Migration
         Schema::create('arsip_sk', function (Blueprint $table) {
             $table->id('id_arsip_sk');
             $table->string('no_sk');
-            $table->date('tgl_surat');
+            $table->date('tgl_surat_fisik');
             $table->string('klasifikasi');
+            $table->string('dari');
             $table->string('tujuan_surat');
-            $table->string('email_tujuan');
-            $table->string('perihal');
-            $table->string('ket');
+            $table->string('email_tujuan')->nullable();
+            $table->string('perihal')->nullable();
+            $table->string('ket')->nullable();
             $table->string('file');
-            $table->unsignedBigInteger('id_user');
             $table->timestamps();
-            $table->foreign('id_user')->references('id_user')->on('user');
         });
     }
 

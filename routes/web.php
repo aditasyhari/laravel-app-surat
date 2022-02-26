@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KlasifikasiController;
+use App\Http\Controllers\ArsipSuratMasukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,25 +62,7 @@ Route::middleware('auth')->group(function() {
 
     });
 
-    Route::prefix('arsip-surat')->group(function () {
-        // masuk
-        Route::get('arsip-surat-masuk', function () {
-            return view('pages.arsip.arsip-masuk.index');
-        });
-        Route::get('tambah-arsip-masuk', function () {
-            return view('pages.arsip.arsip-masuk.tambah');
-        });
-
-        // keluar
-        Route::get('arsip-surat-keluar', function () {
-            return view('pages.arsip.arsip-keluar.index');
-        });
-
-        Route::get('tambah-arsip-keluar', function () {
-            return view('pages.arsip.arsip-keluar.tambah');
-        });
-
-    });
+    
 
     Route::middleware('admin')->group(function() {
         // manajemen anggota
@@ -97,6 +80,22 @@ Route::middleware('auth')->group(function() {
         Route::post('klasifikasi/tambah-klasifikasi', [KlasifikasiController::class, 'tambahData']);
         Route::put('klasifikasi/edit-klasifikasi/{id}', [KlasifikasiController::class, 'update']);
         Route::delete('klasifikasi/delete-klasifikasi/{id}', [KlasifikasiController::class, 'delete']);
+
+        
+        Route::prefix('arsip-surat')->group(function () {
+            // arsip sm
+            Route::get('sm', [ArsipSuratMasukController::class, 'index']);
+            Route::get('sm/tambah-arsip', [ArsipSuratMasukController::class, 'tambah']);
+            Route::get('sm/detail-arsip/{id}', [ArsipSuratMasukController::class, 'detail']);
+            Route::post('sm/tambah-arsip', [ArsipSuratMasukController::class, 'tambahData']);
+            Route::delete('sm/delete-arsip/{id}', [ArsipSuratMasukController::class, 'delete']);
+    
+            // arsip sk
+            Route::get('sk', [ArsipSuratKeluarController::class, 'index']);
+            Route::get('sk/tambah-arsip', [ArsipSuratKeluarController::class, 'tambah']);
+            Route::post('sk/tambah-arsip', [ArsipSuratKeluarController::class, 'tambahData']);
+            Route::delete('sk/delete-arsip/{id}', [ArsipSuratKeluarController::class, 'delete']);
+        });
     });
 });
 
