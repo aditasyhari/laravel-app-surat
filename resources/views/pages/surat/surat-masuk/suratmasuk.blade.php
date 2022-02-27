@@ -4,6 +4,14 @@
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/data-tables/css/jquery.dataTables.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/data-tables/css/select.dataTables.min.css')}}">
+<style>
+    .text-uppercase {
+        text-transform: uppercase;
+    }
+    .text-capitalize {
+        text-transform: capitalize;
+    }
+</style>
 @endpush
 @section('title')
     Surat Masuk
@@ -18,7 +26,7 @@
                 <div class="col s10 m6 l6">
                     <h5 class="breadcrumbs-title mt-0 mb-0">Surat Masuk</h5>
                     <ol class="breadcrumbs mb-0">
-                        <li class="breadcrumb-item"><a href="index-2.html">Dashboard</a>
+                        <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a>
                         </li>
                         <li class="breadcrumb-item active">Surat Masuk
                         </li>
@@ -53,13 +61,13 @@
                                             <tbody>
                                                 @foreach($sm as $m)
                                                 <tr>
-                                                    <td>{{ $m->no_sm }}</td>
-                                                    <td>{{ $m->no_perihal }}</td>
-                                                    <td>{{ $m->klasifikasi }}</td>
-                                                    <td>{{ $m->dari }}</td>
+                                                    <td class="text-uppercase">{{ $m->no_sm }}</td>
+                                                    <td class="text-capitalize">{{ $m->perihal }}</td>
+                                                    <td class="text-capitalize">{{ $m->klasifikasi }}</td>
+                                                    <td class="text-capitalize">{{ $m->dari }}</td>
                                                     <td>
-                                                        <a class="mb-6 waves-effect waves-light gradient-45deg-amber-amber" title="Lihat Detail">
-                                                            Lihat Detail
+                                                        <a href="{{ url('surat-masuk/detail-surat/'.$m->id_arsip_sm) }}" class="btn btn-small waves-effect waves-light gradient-45deg-amber-amber" title="Lihat Detail">
+                                                            Detail
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -72,8 +80,7 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- START RIGHT SIDEBAR NAV -->
-
+            </div>
 
         </div>
     </div>

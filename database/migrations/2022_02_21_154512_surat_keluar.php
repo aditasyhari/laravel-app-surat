@@ -18,7 +18,10 @@ class SuratKeluar extends Migration
             $table->string('nomor_surat');
             $table->date('tgl_surat_fisik');
             $table->string('klasifikasi');
+            $table->string('tujuan_surat');
+            $table->string('email_tujuan');
             $table->string('ukuran_hal');
+            $table->integer('ukuran_ttd');
             $table->string('orientasi_hal');
             $table->integer('m_atas')->nullable();
             $table->integer('m_bawah')->nullable();
@@ -28,8 +31,11 @@ class SuratKeluar extends Migration
             $table->longText('layout_konten');
             $table->longText('layout_kop');
             $table->enum('status_surat', ['disetujui', 'ditolak', 'revisi', 'pending'])->default('pending');
+            $table->enum('status_ttd', ['disetujui', 'ditolak', 'pending'])->default('pending');
             $table->string('revisi')->nullable();
             $table->boolean('read_validator')->default(0);
+            $table->boolean('kirim_email')->default(0);
+            $table->string('file_surat')->nullable();
             $table->unsignedBigInteger('id_pembuat');
             $table->unsignedBigInteger('id_validator');
             $table->unsignedBigInteger('id_template')->default(false);

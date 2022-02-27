@@ -42,14 +42,16 @@ Route::middleware('auth')->group(function() {
     });
     // end surat baru
 
+    // surat masuk
     Route::get('surat-masuk', [SuratController::class, 'suratMasuk']);
+    Route::get('surat-masuk/detail-surat/{id}', [SuratController::class, 'detailSm']);
 
-    Route::get('surat-keluar', function () {
-        return view('pages.surat.surat-keluar.suratkeluar');
-    });
-    Route::get('surat-keluar/tambah-surat', function () {
-        return view('pages.surat.surat-keluar.tambah');
-    });
+    // surat keluar
+    Route::get('surat-keluar', [SuratController::class, 'suratKeluar']);
+    Route::get('surat-keluar/detail-surat/{id}', [SuratController::class, 'detailSk']);
+    Route::get('surat-keluar/edit-surat/{id}', [SuratController::class, 'editSk']);
+    Route::put('surat-keluar/edit-surat/{id}', [SuratController::class, 'updateSk']);
+    Route::delete('surat-keluar/delete-surat/{id}', [SuratController::class, 'deleteSk']);
 
     Route::get('profile', function () {
         return view('pages.profile.index');
