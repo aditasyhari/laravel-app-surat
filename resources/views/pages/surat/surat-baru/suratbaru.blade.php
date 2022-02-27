@@ -31,7 +31,7 @@ Surat Baru
     </div>
     <div class="col s12 m12 xl6">
         <div id="flight-card" class="card">
-            <a href="">
+            <a href="{{url('surat-baru/surat-template')}}">
 
                 <div class="card-header deep-orange accent-2">
                     <div class="card-title">
