@@ -31,9 +31,9 @@ Route::middleware('auth')->group(function() {
         return view('pages.surat.surat-baru.suratbaru');
     });
 
-    Route::get('surat-baru/non-template', function () {
-        return view('pages.surat.surat-baru.nontemplate');
-    });
+    Route::get('surat-baru/non-template', [SuratController::class, 'pengajuanNomor']);
+    Route::post('surat-baru/non-template', [SuratController::class, 'pengajuanNomor']);
+    Route::get('surat-baru/non-template/buat', [SuratController::class, 'suratNonTemplate'])->name('surat-nontemplate');
     Route::get('surat-baru/surat-template', function () {
         return view('pages.surat.surat-baru.template');
     });

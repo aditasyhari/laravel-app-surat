@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('id_user');
             $table->string('nik');
             $table->string('nama');
+            $table->string('kode')->nullable()->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -25,7 +26,6 @@ return new class extends Migration
             $table->string('ttd')->nullable();
             $table->string('foto')->nullable();
             $table->timestamps();
-            // $table->foreignId('current_team_id')->nullable();
         });
     }
 
