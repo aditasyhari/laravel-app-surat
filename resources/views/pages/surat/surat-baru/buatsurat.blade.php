@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/dropify/css/dropify.min.css')}}">
 @endpush
 @section('title')
-Buat Surat
+    Buat Surat
 @endsection
 @section('content')
 <div class="row">
@@ -15,7 +15,7 @@ Buat Surat
                 <div class="col s10 m6 l6">
                     <h5 class="breadcrumbs-title mt-0 mb-0">Surat Baru</h5>
                     <ol class="breadcrumbs mb-0">
-                        <li class="breadcrumb-item"><a href="index-2.html">Dashboard</a>
+                        <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a>
                         </li>
                         <li class="breadcrumb-item active">Buat Surat
                         </li>
@@ -35,99 +35,62 @@ Buat Surat
                                 <div class="card-title">
                                     <div class="row">
                                         <div class="col s12 m6 l10">
-                                            <h4 class="card-title">Entri Surat Keluar</h4>
+                                            <h4 class="card-title">Buat Surat Keluar</h4>
                                             <p>Lengkapi form berikut</p>
-                                        </div>
-                                        <div class="col s12 m6 l2">
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
+                                <br>
                                 <div id="html-view-validations">
                                     <form class="formValidate0" id="formValidate0" method="get">
                                         <div class="row">
                                             <div class="input-field col s12">
                                                 <label for="uname0">Nomor Surat</label>
-                                                <input class="validate" required aria-required="true" id="uname0"
-                                                    name="uname0" type="text">
+                                                <input class="validate" required aria-required="true" name="" type="text" value="{{ $pengajuan['nomor_surat'] }}" readonly>
                                             </div>
                                             <div class="col s12">
-                                                <label for="role">Jenis Surat*</label>
-                                                <select class="error validate" id="role" name="role"
-                                                    aria-required="true" required>
-                                                    <option value="" disabled selected>Choose your profile
-                                                    </option>
-                                                    <option value="1">Manager</option>
-                                                    <option value="2">Developer</option>
-                                                    <option value="3">Business</option>
-                                                </select>
-                                                <div class="input-field">
-                                                </div>
+                                                <label for="role">Klasifikas Surat*</label>
+                                                <input type="hidden" value="{{ $pengajuan['id_klasifikasi'] }}" name="id_klasifikasi">
+                                                <input class="validate" required aria-required="true" name="klasifikasi" type="text" value="{{ $pengajuan['nama_klasifikasi'] }}" readonly>
+                                                <div class="input-field"></div>
                                             </div>
+
                                             <div class="input-field col s12">
-                                                <input type="date" class="datepicker" id="dob">
-                                                <label for="dob">Tanggal Surat Fisik</label>
+                                                <input type="date" class="datepicker" value="{{ $pengajuan['tgl_surat_fisik'] }}" readonly>
+                                                <label for="dob">Tanggal Surat Fisik*</label>
+                                                <div class="input-field"></div>
                                             </div>
+
+                                            <div class="input-field col s6">
+                                                <label for="status">Validator*</label>
+                                                <input name="id_validator" type="hidden" value="{{ $pengajuan['id_validator'] }}">
+                                                <input class="validate" readonly aria-required="true" type="text" value="{{ $pengajuan['nama_validator'] }}">
+                                            </div>
+
+                                            <div class="input-field col s6">
+                                                <label for="status">Persetujuan TTD*</label>
+                                                <input name="id_validator" type="hidden" value="{{ $pengajuan['id_ttd'] }}">
+                                                <input class="validate" readonly aria-required="true" type="text" value="{{ $pengajuan['nama_ttd'] }}">
+                                            </div>
+
                                             <div class="input-field col s12">
-                                                <label for="tujuan">Tujuan Surat</label>
-                                                <input class="validate" required aria-required="true" id="tujuan"
-                                                    name="tujuan" type="text">
+                                                <label for="tujuan">Tujuan Surat*</label>
+                                                <input class="validate" required aria-required="true" id="tujuan" name="tujuan_surat" type="text">
+                                                <div class="input-field"></div>
                                             </div>
+
+                                            <div class="input-field col s12">
+                                                <label for="tujuan">Email Tujuan*</label>
+                                                <input class="validate" required aria-required="true" name="email_tujuan" type="text">
+                                                <div class="input-field"></div>
+                                            </div>
+
                                             <div class="input-field col s12">
                                                 <label for="status">Status</label>
                                                 <input class="validate" required aria-required="true" id="status"
                                                     name="status" type="text">
-                                            </div>
-                                            <div class="col s12">
-                                                <p>Karakteristik Surat</p>
-                                                <div class="col">
-                                                    <label>
-                                                        <input class="validate" required aria-required="true"
-                                                            name="gender0" type="radio" checked />
-                                                        <span>Surat Terbatas</span>
-                                                    </label>
-                                                </div>
-                                                <div class="col">
-                                                    <label>
-                                                        <input class="validate" required aria-required="true"
-                                                            name="gender0" type="radio" />
-                                                        <span>Surat Rahasia</span>
-                                                    </label>
-                                                </div>
-                                                <div class="col">
-                                                    <label>
-                                                        <input class="validate" required aria-required="true"
-                                                            name="gender0" type="radio" />
-                                                        <span>Surat Biasa</span>
-                                                    </label>
-                                                </div>
-                                                <div class="input-field">
-                                                </div>
-                                            </div>
-                                            <div class="col s12">
-                                                <p>Derajat Surat</p>
-                                                <div class="col">
-                                                    <label>
-                                                        <input class="validate" required aria-required="true"
-                                                            name="gender0" type="radio" />
-                                                        <span>Biasa</span>
-                                                    </label>
-                                                </div>
-                                                <div class="col">
-                                                    <label>
-                                                        <input class="validate" required aria-required="true"
-                                                            name="gender0" type="radio" />
-                                                        <span>Segera</span>
-                                                    </label>
-                                                </div>
-                                                <div class="col">
-                                                    <label>
-                                                        <input class="validate" required aria-required="true"
-                                                            name="gender0" type="radio" />
-                                                        <span>Sangat Segera</span>
-                                                    </label>
-                                                </div>
-                                                <div class="input-field">
-                                                </div>
+                                                <div class="input-field"></div>
                                             </div>
 
                                             <div class="input-field col s12">
@@ -136,51 +99,27 @@ Buat Surat
                                                     name="perihal" type="text">
                                             </div>
 
+                                            <!-- <div class="progress">
+                                                <div class="determinate grey" style="width: 100%"></div>
+                                            </div> -->
+                                            <div class="col s12">
+                                                <p>
+                                                    <label>
+                                                        <input class="validate" required aria-required="true"
+                                                            id="tnc_select1" type="checkbox" />
+                                                        <span>Data yang saya masukkan sudah benar</span>
+                                                    </label>
+                                                </p>
+                                                <div class="input-field">
+                                                </div>
+                                            </div>
+
                                             <div class="input-field col s12">
-                                                <button class="btn waves-effect light-blue left" type="submit"
-                                                    name="action"> Lihat template
-                                                    <i class="material-icons right">remove_red_eye</i>
+                                                <button class="btn waves-effect green left" type="submit" name="action">
+                                                    Buat Surat
                                                 </button>
                                             </div>
-                                            <div class="col s12">
-                                                <p>
-                                                    <label>
-                                                        <input class="validate" required aria-required="true"
-                                                            id="tnc_select1" type="checkbox" />
-                                                        <span>Centang untuk edit data</span>
-                                                    </label>
-                                                </p>
-                                                <div class="input-field">
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="determinate grey" style="width: 100%"></div>
-                                            </div>
-                                            <div class="col s12">
-                                                <p>
-                                                    <label>
-                                                        <input class="validate" required aria-required="true"
-                                                            id="tnc_select1" type="checkbox" />
-                                                        <span>Centang untuk edit data</span>
-                                                    </label>
-                                                </p>
-                                                <div class="input-field">
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="input-field col s12">
-                                                    <button class="btn waves-effect green left" type="submit"
-                                                        name="action"> Send
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="input-field col s12">
-                                                    <button class="btn waves-effect light-blue left" type="submit"
-                                                        name="action">Preview
-                                                    </button>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                     </form>
                                 </div>

@@ -68,13 +68,18 @@ class SuratController extends Controller
                 }
 
                 $nomor_surat = "$max/$kode/$bulan_romawi/$tahun";
+                $validator = User::select('nama')->find($request->id_validator);
+                $ttd = User::select('nama')->find($request->id_ttd);
 
                 $pengajuan = [
                     'nomor_surat' => $nomor_surat,
-                    'tgl-surat_fisik' => $request->tgl_surat_fisik,
-                    'id_klasifikasi' => $request->klasifikasi,
+                    'tgl_surat_fisik' => $request->tgl_surat_fisik,
+                    'id_klasifikasi' => $request->id_klasifikasi,
+                    'nama_klasifikasi' => $klasifikasi->nama,
                     'id_validator' => $request->id_validator,
                     'id_ttd' => $request->id_ttd,
+                    'nama_ttd' => $ttd->nama,
+                    'nama_validator' => $ttd->nama,
                 ];
 
                 return redirect()->route('surat-nontemplate', ['pengajuan' => $pengajuan]);
@@ -87,8 +92,9 @@ class SuratController extends Controller
     public function suratNonTemplate(Request $request)
     {
         try {
-            // return view('pages.surat.surat-baru.pengajuan-nomor');
-            dd($request->pengajuan['nomor_surat']);
+            $pengajuan = $request->pengajuan;
+
+            return view('pages.surat.surat-baru.buatsurat', compact('pengajuan'));
         } catch (Exception $e) {
             return view('error.500');
         }
