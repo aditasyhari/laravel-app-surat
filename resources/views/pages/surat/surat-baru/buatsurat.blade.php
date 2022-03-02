@@ -2,17 +2,69 @@
 @push('style')
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/dropify/css/dropify.min.css')}}">
 
+<style>
+    .mbm-5 {
+        margin-bottom: 5px;
+    }
+</style>
+
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
     tinymce.init({
-        selector: '#mytextarea',
-        height: 500
+        selector: '#layout_konten',
+        height: 500,
+        plugins: 'lineheight style fullpage print preview powerpaste casechange searchreplace autosave save directionality advcode visualblocks visualchars fullscreen table charmap hr nonbreaking toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter permanentpen charmap mentions',
+        theme: 'silver',
+        convert_fonts_to_spans : false,  
+        toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify lineheight | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | charmap | fullscreen  preview save print | a11ycheck',
+        lineheight_formats: '1 1.1 1.2 1.3 1.4 1.5 2',
+        font_formats: "Arial=arial,helvetica,sans-serif;Sans Serif=sans-serif;Courier New=courier;Georgia=georgia,palatino;Helvetica=helvetica;Impact=impact,chicago;Symbol=symbol;Tahoma=tahoma,arial,helvetica,sans-serif;Terminal=terminal,monaco;Times New Roman=times;Verdana=verdana,geneva;Webdings=webdings;Wingdings=wingdings",
+    });
+
+    tinymce.init({
+        selector: '#layout_kop',
+        height: 350,
+        plugins: 'hr image lineheight style fullpage print preview powerpaste casechange searchreplace autosave save directionality advcode visualblocks visualchars fullscreen table charmap hr nonbreaking toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter permanentpen charmap mentions',
+        theme: 'silver',
+        convert_fonts_to_spans : false,
+        toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify lineheight hr | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | charmap | fullscreen  preview save print | a11ycheck image',
+        lineheight_formats: '1 1.1 1.2 1.3 1.4 1.5 2',
+        automatic_uploads : true,
+        // images_reuse_filename: true,
+        file_picker_types: 'image',
+        /* and here's our custom image picker*/
+        file_picker_callback: function (cb, value, meta) {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+
+            input.onchange = function () {
+                var file = this.files[0];
+
+                var reader = new FileReader();
+                reader.onload = function () {
+    
+                    var id = 'blobid' + (new Date()).getTime();
+                    var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                    var base64 = reader.result.split(',')[1];
+                    // var blobInfo = blobCache.create(id, file);
+                    var blobInfo = blobCache.create(id, file, base64);
+                    blobCache.add(blobInfo);
+
+                    cb(blobInfo.blobUri(), { title: file.name });
+                };
+                reader.readAsDataURL(file);
+            };
+
+            input.click();
+        },
+        font_formats: "Arial=arial,helvetica,sans-serif;Sans Serif=sans-serif;Courier New=courier;Georgia=georgia,palatino;Helvetica=helvetica;Impact=impact,chicago;Symbol=symbol;Tahoma=tahoma,arial,helvetica,sans-serif;Terminal=terminal,monaco;Times New Roman=times;Verdana=verdana,geneva;Webdings=webdings;Wingdings=wingdings"
     });
 
 </script>
 @endpush
 @section('title')
-Buat Surat
+    Buat Surat
 @endsection
 @section('content')
 <div class="row">
@@ -100,97 +152,74 @@ Buat Surat
 
                                             <div class="input-field col s12">
                                                 <label for="tujuan">Email Tujuan*</label>
-                                                <input class="validate" required aria-required="true"
-                                                    name="email_tujuan" type="text">
+                                                <input class="validate" required aria-required="true" name="email_tujuan" type="text">
                                                 <div class="input-field"></div>
                                             </div>
 
                                             <div class="input-field col s12">
-                                                <label for="status">Status</label>
-                                                <input class="validate" required aria-required="true" id="status"
-                                                    name="status" type="text">
+                                                <label for="perihal">Perihal*</label>
+                                                <input class="validate" required aria-required="true" id="perihal" name="perihal" type="text">
                                                 <div class="input-field"></div>
                                             </div>
 
-                                            <div class="input-field col s12">
-                                                <label for="perihal">Perihal</label>
-                                                <input class="validate" required aria-required="true" id="perihal"
-                                                    name="perihal" type="text">
+                                            <div class="input-field col s3">
+                                                <label for="">Margin Kanan (mm)</label>
+                                                <input class="validate" required aria-required="true" value="10" name="m_kanan" type="number">
                                             </div>
 
-                                            <!-- <div class="progress">
-                                                <div class="determinate grey" style="width: 100%"></div>
-                                            </div> -->
-                                            <div class="col s8">
-                                                <label for="mytextarea">Isi Surat*</label>
-                                                <form method="post">
-                                                    <textarea id="mytextarea"></textarea>
-                                                </form>
+                                            <div class="input-field col s3">
+                                                <label for="">Margin Kiri (mm)</label>
+                                                <input class="validate" required aria-required="true" value="10" name="m_kiri" type="number">
                                             </div>
-                                            <div class="col s4">
-                                                <li class="list-group-item">
-                                                    <p class="card-description">Klik tombol dibawah ini untuk
-                                                        menyisipkan variabel kedalam surat.</p>
-                                                    <div class="row mt-4">
-                                                        <a class="waves-effect btn-flat">Nama</a>
-                                                        <a class="waves-effect btn-flat">Email</a>
-                                                        <a class="waves-effect btn-flat">Perihal</a>
-                                                        <a class="waves-effect btn-flat">No Surat</a>
-                                                        <a class="waves-effect btn-flat">Tgl Surat</a>
-                                                        <a class="waves-effect btn-flat">Tujuan</a>
-                                                        <a class="waves-effect btn-flat">Karakteristik</a>
-                                                        <a class="waves-effect btn-flat">Derajat</a>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <p class="card-description">Klik tombol dibawah untuk memilih Tanda
-                                                        Tangan.</p>
-                                                    <select class="js-example-basic-multiple w-100" name="ttd_user"
-                                                        id="ttd_user" data-placeholder="Pilih TTD"
-                                                        onchange="addTtd(this.value)">
-                                                        <option selected disabled>Pilih TTD</option>
-                                                        <option value="1">Administrator (ICT)</option>
-                                                        <option value="102">Ketua III (Ketua III)</option>
-                                                        <option value="98">Ketua Perpenas (PP1)</option>
-                                                        <option value="103">Nuris - Staf IT II (Staf IT II)</option>
-                                                        <option value="101">nurul islam (Sekretaris I)</option>
-                                                        <option value="104">sahrul (Staf Khusus Perpenas)</option>
-                                                        <option value="99">Sekretariat (Kepala Sekretariat)</option>
-                                                        <option value="100">Sekretariat umum (Staf Sekretariat Umum)
-                                                        </option>
-                                                        <option value="90">Staf IT I (Staf IT I)</option>
-                                                        <option value="93">Staf Khusus (Staf Khusus Perpenas)</option>
-                                                    </select>
-                                                    <div id="hiden"></div>
-                                                    <div id="tanda"></div>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <p class="card-description ">Untuk settingan surat default.</p>
-                                                    <table class="card-description w-100 table">
-                                                        <tr>
-                                                            <td>1.</td>
-                                                            <td>Orientasi Ukuran</td>
-                                                            <td>: Potrait A4</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2.</td>
-                                                            <td>Margin</td>
-                                                            <td>: 10 mm</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td></td>
-                                                            <td>Margin Kiri</td>
-                                                            <td>: 15 mm</td>
-                                                        </tr>
-                                                    </table>
 
-                                                </li>
+                                            <div class="input-field col s3">
+                                                <label for="">Margin Atas (mm)</label>
+                                                <input class="validate" required aria-required="true" value="10" name="m_atas" type="number">
                                             </div>
+
+                                            <div class="input-field col s3">
+                                                <label for="">Margin Bawah (mm)</label>
+                                                <input class="validate" required aria-required="true" value="10" name="m_bawah" type="number">
+                                            </div>
+
                                             <div class="col s12">
+                                                <label for="mytextarea">Kop Surat* (size gambar/logo harus kurang dari 1 mb)</label>
+                                                <textarea id="layout_kop" name="layout_kop" required></textarea>
+                                            </div>
+
+                                            <div class="progress">
+                                                <div class="determinate grey" style="width: 100%"></div>
+                                            </div>
+
+                                            <div class="col s12 mt-20">
+                                                <div class="row">
+                                                    <p>Klik tombol dibawah ini untuk menyisipkan variabel kedalam surat.</p>
+                                                </div>
+                                                <div class="row mb-20" style="margin-top: 5px;">
+                                                    <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('nama')">Nama</button>
+                                                    <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('email')">Email</button>
+                                                    <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('perihal')">Perihal</button>
+                                                    <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('nosurat')">No Surat</button>
+                                                    <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('tglsurat')">Tgl Surat</button>
+                                                    <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('tujuan')">Tujuan</button>
+                                                    <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('emailtujuan')">Email Tujuan</button>
+                                                    <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('ttd')">TTD</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="col s12">
+                                                <label for="mytextarea">Isi Surat*</label>
+                                                <textarea id="layout_konten" name="layout_konten" required></textarea>
+                                            </div>
+
+                                            <div class="progress">
+                                                <div class="determinate grey" style="width: 100%"></div>
+                                            </div>
+
+                                            <div class="col s12" style="margin-top: 15px;">
                                                 <p>
                                                     <label>
-                                                        <input class="validate" required aria-required="true"
-                                                            id="tnc_select1" type="checkbox" />
+                                                        <input class="validate" onclick="cek()" id="centang" type="checkbox" />
                                                         <span>Data yang saya masukkan sudah benar</span>
                                                     </label>
                                                 </p>
@@ -198,9 +227,8 @@ Buat Surat
                                                 </div>
                                             </div>
 
-
                                             <div class="input-field col s12">
-                                                <button class="btn waves-effect green left" type="submit" name="action">
+                                                <button class="btn waves-effect green left" type="submit" id="btn-submit" disabled>
                                                     Buat Surat
                                                 </button>
                                             </div>
@@ -221,5 +249,42 @@ Buat Surat
 <script src="{{asset('app-assets/js/scripts/form-layouts.js')}}" type="text/javascript"></script>
 <script src="{{asset('app-assets/vendors/dropify/js/dropify.min.js')}}"></script>
 <script src="{{asset('app-assets/js/scripts/form-file-uploads.js')}}"></script>
+
+<script>
+    function variabel(a){
+        switch(a) {
+            case 'nama': tinymce.get("layout_konten").execCommand('mceInsertContent', false, '=Nama=');
+                break;
+            case 'email': tinymce.get("layout_konten").execCommand('mceInsertContent', false, '=Email=');
+                break;
+            case 'perihal': tinymce.get("layout_konten").execCommand('mceInsertContent', false, '=Perihal=');
+                break;
+            case 'nosurat': tinymce.get("layout_konten").execCommand('mceInsertContent', false, '=NoSurat=');
+                break;
+            case 'tglsurat': tinymce.get("layout_konten").execCommand('mceInsertContent', false, '=TglSurat=');
+                break;
+            case 'tujuan': tinymce.get("layout_konten").execCommand('mceInsertContent', false, '=Tujuan=');
+                break;
+            case 'emailtujuan': tinymce.get("layout_konten").execCommand('mceInsertContent', false, '=EmailTujuan=');
+                break;
+            case 'ttd': tinymce.get("layout_konten").execCommand('mceInsertContent', false, '=TTD=');
+                break;
+            default:
+                break;
+        }
+    }
+
+    var btnSubmit = document.getElementById('btn-submit');
+
+    function cek() {
+        var centang = document.getElementById('centang');
+
+        if(centang.checked == true) {
+            btnSubmit.removeAttribute('disabled');
+        } else {
+            btnSubmit.disabled = true
+        }
+    }
+</script>
 
 @endpush
