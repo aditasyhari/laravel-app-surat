@@ -37,8 +37,7 @@
                     <div class="col s12">
                         <div class="card">
                             <div class="card-content">
-                                <a href="{{url('surat-keluar/tambah-surat')}}"
-                                class="waves-effect waves-light  btn gradient-45deg-light-blue-cyan box-shadow-none border-round mr-1 mb-1 right">Tambah</a>
+
                                 <h4 class="card-title">Pilih Template Surat</h4>
                                 <div class="row">
                                     <div class="col s12">
@@ -62,7 +61,7 @@
                                                                 </a>
                                                             </div>
                                                             <div class="col">
-                                                                <a href="{{url('surat-baru/surat-template/buat-surat')}}" class="waves-effect waves-light btn-small">Buat Surat</a>
+                                                                <a href="{{url('surat-baru/surat-template/tambah-surat')}}" class="waves-effect waves-light btn-small">Buat Surat</a>
                                                             </div>
                                                         </div>
                                                     </td>

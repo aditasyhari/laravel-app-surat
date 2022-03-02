@@ -34,11 +34,12 @@ Route::middleware('auth')->group(function() {
     Route::get('surat-baru/non-template', [SuratController::class, 'pengajuanNomor']);
     Route::post('surat-baru/non-template', [SuratController::class, 'pengajuanNomor']);
     Route::get('surat-baru/non-template/buat', [SuratController::class, 'suratNonTemplate'])->name('surat-nontemplate');
+
     Route::get('surat-baru/surat-template', function () {
         return view('pages.surat.surat-baru.template');
     });
-    Route::get('surat-baru/surat-template/buat-surat', function () {
-        return view('pages.surat.surat-baru.buatsurat');
+    Route::get('surat-baru/surat-template/tambah-surat', function () {
+        return view('pages.surat.surat-baru.buatsuratbaru');
     });
     // end surat baru
 
