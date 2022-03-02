@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="collapsible-body" href="{{url('template-surat/approv-template')}}" data-i18n="">
+                    <a class="collapsible-body" href="{{url('template-surat/template-approval')}}" data-i18n="">
                         <i class="material-icons">radio_button_unchecked</i>
                         <span>Approv Template</span>
                     </a>

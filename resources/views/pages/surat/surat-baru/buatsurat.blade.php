@@ -1,9 +1,18 @@
 @extends('layout.master')
 @push('style')
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/dropify/css/dropify.min.css')}}">
+
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#mytextarea',
+        height: 500
+    });
+
+</script>
 @endpush
 @section('title')
-    Buat Surat
+Buat Surat
 @endsection
 @section('content')
 <div class="row">
@@ -47,42 +56,52 @@
                                         <div class="row">
                                             <div class="input-field col s12">
                                                 <label for="uname0">Nomor Surat</label>
-                                                <input class="validate" required aria-required="true" name="" type="text" value="{{ $pengajuan['nomor_surat'] }}" readonly>
+                                                <input class="validate" required aria-required="true" name=""
+                                                    type="text" value="{{ $pengajuan['nomor_surat'] }}" readonly>
                                             </div>
                                             <div class="col s12">
                                                 <label for="role">Klasifikas Surat*</label>
-                                                <input type="hidden" value="{{ $pengajuan['id_klasifikasi'] }}" name="id_klasifikasi">
-                                                <input class="validate" required aria-required="true" name="klasifikasi" type="text" value="{{ $pengajuan['nama_klasifikasi'] }}" readonly>
+                                                <input type="hidden" value="{{ $pengajuan['id_klasifikasi'] }}"
+                                                    name="id_klasifikasi">
+                                                <input class="validate" required aria-required="true" name="klasifikasi"
+                                                    type="text" value="{{ $pengajuan['nama_klasifikasi'] }}" readonly>
                                                 <div class="input-field"></div>
                                             </div>
 
                                             <div class="input-field col s12">
-                                                <input type="date" class="datepicker" value="{{ $pengajuan['tgl_surat_fisik'] }}" readonly>
+                                                <input type="date" class="datepicker"
+                                                    value="{{ $pengajuan['tgl_surat_fisik'] }}" readonly>
                                                 <label for="dob">Tanggal Surat Fisik*</label>
                                                 <div class="input-field"></div>
                                             </div>
 
                                             <div class="input-field col s6">
                                                 <label for="status">Validator*</label>
-                                                <input name="id_validator" type="hidden" value="{{ $pengajuan['id_validator'] }}">
-                                                <input class="validate" readonly aria-required="true" type="text" value="{{ $pengajuan['nama_validator'] }}">
+                                                <input name="id_validator" type="hidden"
+                                                    value="{{ $pengajuan['id_validator'] }}">
+                                                <input class="validate" readonly aria-required="true" type="text"
+                                                    value="{{ $pengajuan['nama_validator'] }}">
                                             </div>
 
                                             <div class="input-field col s6">
                                                 <label for="status">Persetujuan TTD*</label>
-                                                <input name="id_validator" type="hidden" value="{{ $pengajuan['id_ttd'] }}">
-                                                <input class="validate" readonly aria-required="true" type="text" value="{{ $pengajuan['nama_ttd'] }}">
+                                                <input name="id_validator" type="hidden"
+                                                    value="{{ $pengajuan['id_ttd'] }}">
+                                                <input class="validate" readonly aria-required="true" type="text"
+                                                    value="{{ $pengajuan['nama_ttd'] }}">
                                             </div>
 
                                             <div class="input-field col s12">
                                                 <label for="tujuan">Tujuan Surat*</label>
-                                                <input class="validate" required aria-required="true" id="tujuan" name="tujuan_surat" type="text">
+                                                <input class="validate" required aria-required="true" id="tujuan"
+                                                    name="tujuan_surat" type="text">
                                                 <div class="input-field"></div>
                                             </div>
 
                                             <div class="input-field col s12">
                                                 <label for="tujuan">Email Tujuan*</label>
-                                                <input class="validate" required aria-required="true" name="email_tujuan" type="text">
+                                                <input class="validate" required aria-required="true"
+                                                    name="email_tujuan" type="text">
                                                 <div class="input-field"></div>
                                             </div>
 
@@ -102,6 +121,71 @@
                                             <!-- <div class="progress">
                                                 <div class="determinate grey" style="width: 100%"></div>
                                             </div> -->
+                                            <div class="col s8">
+                                                <label for="mytextarea">Isi Surat*</label>
+                                                <form method="post">
+                                                    <textarea id="mytextarea"></textarea>
+                                                </form>
+                                            </div>
+                                            <div class="col s4">
+                                                <li class="list-group-item">
+                                                    <p class="card-description">Klik tombol dibawah ini untuk
+                                                        menyisipkan variabel kedalam surat.</p>
+                                                    <div class="row mt-4">
+                                                        <a class="waves-effect btn-flat">Nama</a>
+                                                        <a class="waves-effect btn-flat">Email</a>
+                                                        <a class="waves-effect btn-flat">Perihal</a>
+                                                        <a class="waves-effect btn-flat">No Surat</a>
+                                                        <a class="waves-effect btn-flat">Tgl Surat</a>
+                                                        <a class="waves-effect btn-flat">Tujuan</a>
+                                                        <a class="waves-effect btn-flat">Karakteristik</a>
+                                                        <a class="waves-effect btn-flat">Derajat</a>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p class="card-description">Klik tombol dibawah untuk memilih Tanda
+                                                        Tangan.</p>
+                                                    <select class="js-example-basic-multiple w-100" name="ttd_user"
+                                                        id="ttd_user" data-placeholder="Pilih TTD"
+                                                        onchange="addTtd(this.value)">
+                                                        <option selected disabled>Pilih TTD</option>
+                                                        <option value="1">Administrator (ICT)</option>
+                                                        <option value="102">Ketua III (Ketua III)</option>
+                                                        <option value="98">Ketua Perpenas (PP1)</option>
+                                                        <option value="103">Nuris - Staf IT II (Staf IT II)</option>
+                                                        <option value="101">nurul islam (Sekretaris I)</option>
+                                                        <option value="104">sahrul (Staf Khusus Perpenas)</option>
+                                                        <option value="99">Sekretariat (Kepala Sekretariat)</option>
+                                                        <option value="100">Sekretariat umum (Staf Sekretariat Umum)
+                                                        </option>
+                                                        <option value="90">Staf IT I (Staf IT I)</option>
+                                                        <option value="93">Staf Khusus (Staf Khusus Perpenas)</option>
+                                                    </select>
+                                                    <div id="hiden"></div>
+                                                    <div id="tanda"></div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p class="card-description ">Untuk settingan surat default.</p>
+                                                    <table class="card-description w-100 table">
+                                                        <tr>
+                                                            <td>1.</td>
+                                                            <td>Orientasi Ukuran</td>
+                                                            <td>: Potrait A4</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2.</td>
+                                                            <td>Margin</td>
+                                                            <td>: 10 mm</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td>Margin Kiri</td>
+                                                            <td>: 15 mm</td>
+                                                        </tr>
+                                                    </table>
+
+                                                </li>
+                                            </div>
                                             <div class="col s12">
                                                 <p>
                                                     <label>
@@ -114,12 +198,13 @@
                                                 </div>
                                             </div>
 
+
                                             <div class="input-field col s12">
                                                 <button class="btn waves-effect green left" type="submit" name="action">
                                                     Buat Surat
                                                 </button>
                                             </div>
-                                            
+
                                         </div>
                                     </form>
                                 </div>
@@ -128,8 +213,6 @@
                     </div>
                 </div>
             </div><!-- START RIGHT SIDEBAR NAV -->
-
-
         </div>
     </div>
 </div>

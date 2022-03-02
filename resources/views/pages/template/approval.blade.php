@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/data-tables/css/select.dataTables.min.css')}}">
 @endpush
 @section('title')
-Approval Surat
+Approval Template
 @endsection
 @section('content')
 <div class="row">
@@ -17,11 +17,11 @@ Approval Surat
         <div class="container">
             <div class="row">
                 <div class="col s10 m6 l6">
-                    <h5 class="breadcrumbs-title mt-0 mb-0">Approval Surat</h5>
+                    <h5 class="breadcrumbs-title mt-0 mb-0">Approval Template</h5>
                     <ol class="breadcrumbs mb-0">
                         <li class="breadcrumb-item"><a href="index-2.html">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item active">Approval Surat
+                        <li class="breadcrumb-item active">Approval Template
                         </li>
                     </ol>
                 </div>
@@ -40,7 +40,7 @@ Approval Surat
                             <div class="card-content">
                                 <a href="#"
                                     class="waves-effect waves-light  btn gradient-45deg-light-blue-cyan box-shadow-none border-round mr-1 mb-1 right">Tambah</a>
-                                <h4 class="card-title">Data Approval Surat</h4>
+                                <h4 class="card-title">Data Approval Template</h4>
                                 <div class="row">
                                     <div class="col s12">
                                         <table id="page-length-option" class="display">
@@ -58,20 +58,23 @@ Approval Surat
                                                     <td>System Architect</td>
                                                     <td>Edinburgh</td>
                                                     <td>
-                                                        <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-amber-amber" title="detail">
-                                                            <i class="material-icons">print</i>
-                                                        </a>
-                                                        <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-green-teal" title="edit">
-                                                            <i class="material-icons">edit</i>
-                                                        </a>
-                                                        <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-purple-deep-orange" title="delete">
-                                                            <i class="material-icons">delete</i>
-                                                        </a>
+                                                        <div class="col">
+                                                            <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-amber-amber"
+                                                                title="detail">
+                                                                <i class="material-icons">print</i>
+                                                            </a>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="input-field col s12">
+                                                                <button class="btn waves-effect green left"
+                                                                    type="submit" name="action">
+                                                                    Approval
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
-
                                             </tbody>
-
                                         </table>
                                     </div>
                                 </div>

@@ -63,10 +63,9 @@ Route::middleware('auth')->group(function() {
         Route::get('daftar-template', function () {
             return view('pages.template.daftar');
         });
-         Route::get('approv-template', function () {
-            return view('pages.template.approv');
+        Route::get('template-approval', function () {
+            return view('pages.template.approval');
         });
-
     });
 
     Route::middleware('admin')->group(function() {
@@ -86,7 +85,7 @@ Route::middleware('auth')->group(function() {
         Route::put('klasifikasi/edit-klasifikasi/{id}', [KlasifikasiController::class, 'update']);
         Route::delete('klasifikasi/delete-klasifikasi/{id}', [KlasifikasiController::class, 'delete']);
 
-        
+
         Route::prefix('arsip-surat')->group(function () {
             // arsip sm
             Route::get('sm', [ArsipSuratMasukController::class, 'index']);
@@ -94,7 +93,7 @@ Route::middleware('auth')->group(function() {
             Route::get('sm/detail-arsip/{id}', [ArsipSuratMasukController::class, 'detail']);
             Route::post('sm/tambah-arsip', [ArsipSuratMasukController::class, 'tambahData']);
             Route::delete('sm/delete-arsip/{id}', [ArsipSuratMasukController::class, 'delete']);
-    
+
             // arsip sk
             Route::get('sk', [ArsipSuratKeluarController::class, 'index']);
             Route::get('sk/tambah-arsip', [ArsipSuratKeluarController::class, 'tambah']);
