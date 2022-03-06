@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function() {
     Route::get('surat-baru/non-template', [SuratController::class, 'pengajuanNomor']);
     Route::post('surat-baru/non-template', [SuratController::class, 'pengajuanNomor']);
     Route::get('surat-baru/non-template/buat', [SuratController::class, 'suratNonTemplate'])->name('surat-nontemplate');
+    Route::post('surat-baru/non-template/buat', [SuratController::class, 'buatSuratNonTemplate']);
 
     Route::get('surat-baru/surat-template', function () {
         return view('pages.surat.surat-baru.template');

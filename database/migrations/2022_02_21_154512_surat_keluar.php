@@ -39,7 +39,7 @@ class SuratKeluar extends Migration
             $table->string('file_surat')->nullable();
             $table->unsignedBigInteger('id_pembuat');
             $table->unsignedBigInteger('id_validator');
-            $table->unsignedBigInteger('id_template')->default(false);
+            $table->unsignedBigInteger('id_template')->nullable();
             $table->unsignedBigInteger('id_ttd');
             $table->timestamps();
 

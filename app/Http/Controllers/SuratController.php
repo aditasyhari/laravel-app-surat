@@ -55,27 +55,22 @@ class SuratController extends Controller
                 return view('pages.surat.surat-baru.pengajuan-nomor', compact(['klasifikasi', 'user']));
             } else {    
                 $klasifikasi = Klasifikasi::find($request->id_klasifikasi);
-                $max = SuratKeluar::where('kode_klasifikasi', $klasifikasi->kode)->max('urutan');
-                $kode = Str::upper($klasifikasi->kode);
-                $bulan = Carbon::parse($request->tgl_surat_fisik)->format('m');
-                $bulan_romawi = getBulanRomawi($bulan);
-                $tahun = date("Y");
 
-                if(is_numeric($max)) {
-                    $max += 1;
-                } else {
-                    $max = 1;
-                }
+                $param = [
+                    'kode' => $klasifikasi->kode,
+                    'tgl_surat_fisik' => $request->tgl_surat_fisik,
+                ];
 
-                $nomor_surat = "$max/$kode/$bulan_romawi/$tahun";
+                $nomor = nomorSurat($param);
                 $validator = User::select('nama')->find($request->id_validator);
                 $ttd = User::select('nama')->find($request->id_ttd);
 
                 $pengajuan = [
-                    'nomor_surat' => $nomor_surat,
+                    'nomor_surat' => $nomor['nomor_surat'],
                     'tgl_surat_fisik' => $request->tgl_surat_fisik,
-                    'id_klasifikasi' => $request->id_klasifikasi,
+                    'kode_klasifikasi' => $klasifikasi->kode,
                     'nama_klasifikasi' => $klasifikasi->nama,
+                    'id_pembuat' => Auth::user()->id_user,
                     'id_validator' => $request->id_validator,
                     'id_ttd' => $request->id_ttd,
                     'nama_ttd' => $ttd->nama,
@@ -95,6 +90,37 @@ class SuratController extends Controller
             $pengajuan = $request->pengajuan;
 
             return view('pages.surat.surat-baru.buatsurat', compact('pengajuan'));
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
+    public function buatSuratNonTemplate(Request $request)
+    {
+        try {
+            $req = $request->except(['pengajuan']);
+
+            $param = [
+                'kode' => $request->kode_klasifikasi,
+                'tgl_surat_fisik' => $request->tgl_surat_fisik,
+            ];
+                
+            $nomor = nomorSurat($param);
+            $req['nomor_surat'] = $nomor['nomor_surat'];
+            $req['urutan'] = $nomor['urutan'];
+
+            $param['perihal'] = $request->perihal;
+            $param['tujuan'] = $request->tujuan;
+            $param['email_tujuan'] = $request->email_tujuan;
+            $param['ukuran_ttd'] = $request->ukuran_ttd;
+            $param['nomor_surat'] = $nomor['nomor_surat'];
+            $param['konten'] = $request->layout_konten;
+
+            $req['layout_konten'] = variabelReplace($param);
+
+            SuratKeluar::create($req);
+
+            return redirect('/surat-keluar')->with('status', 'Surat berhasil dibuat!');
         } catch (Exception $e) {
             return view('error.500');
         }

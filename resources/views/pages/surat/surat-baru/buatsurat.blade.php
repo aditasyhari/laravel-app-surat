@@ -104,49 +104,42 @@
                                 <hr>
                                 <br>
                                 <div id="html-view-validations">
-                                    <form class="formValidate0" id="formValidate0" method="get">
+                                    <form class="formValidate0" id="formValidate0" method="post" action="{{ url('/surat-baru/non-template/buat') }}" enctype="multipart/form-data">
+                                        @csrf
                                         <div class="row">
+                                            <input type="hidden" value="{{ $pengajuan['id_pembuat'] }}" name="id_pembuat">
                                             <div class="input-field col s12">
                                                 <label for="uname0">Nomor Surat</label>
-                                                <input class="validate" required aria-required="true" name=""
-                                                    type="text" value="{{ $pengajuan['nomor_surat'] }}" readonly>
+                                                <input class="validate" required aria-required="true" name="" type="text" value="{{ $pengajuan['nomor_surat'] }}" readonly>
                                             </div>
                                             <div class="col s12">
                                                 <label for="role">Klasifikas Surat*</label>
-                                                <input type="hidden" value="{{ $pengajuan['id_klasifikasi'] }}"
-                                                    name="id_klasifikasi">
-                                                <input class="validate" required aria-required="true" name="klasifikasi"
-                                                    type="text" value="{{ $pengajuan['nama_klasifikasi'] }}" readonly>
+                                                <input type="hidden" value="{{ $pengajuan['kode_klasifikasi'] }}" name="kode_klasifikasi">
+                                                <input class="validate" required aria-required="true" name="klasifikasi" type="text" value="{{ $pengajuan['nama_klasifikasi'] }}" readonly>
                                                 <div class="input-field"></div>
                                             </div>
 
                                             <div class="input-field col s12">
-                                                <input type="date" class="datepicker"
-                                                    value="{{ $pengajuan['tgl_surat_fisik'] }}" readonly>
+                                                <input type="date" class="datepicker" value="{{ $pengajuan['tgl_surat_fisik'] }}" readonly name="tgl_surat_fisik">
                                                 <label for="dob">Tanggal Surat Fisik*</label>
                                                 <div class="input-field"></div>
                                             </div>
 
                                             <div class="input-field col s6">
                                                 <label for="status">Validator*</label>
-                                                <input name="id_validator" type="hidden"
-                                                    value="{{ $pengajuan['id_validator'] }}">
-                                                <input class="validate" readonly aria-required="true" type="text"
-                                                    value="{{ $pengajuan['nama_validator'] }}">
+                                                <input name="id_validator" type="hidden" value="{{ $pengajuan['id_validator'] }}">
+                                                <input class="validate" readonly aria-required="true" type="text" value="{{ $pengajuan['nama_validator'] }}">
                                             </div>
 
                                             <div class="input-field col s6">
                                                 <label for="status">Persetujuan TTD*</label>
-                                                <input name="id_validator" type="hidden"
-                                                    value="{{ $pengajuan['id_ttd'] }}">
-                                                <input class="validate" readonly aria-required="true" type="text"
-                                                    value="{{ $pengajuan['nama_ttd'] }}">
+                                                <input name="id_ttd" type="hidden" value="{{ $pengajuan['id_ttd'] }}">
+                                                <input class="validate" readonly aria-required="true" type="text" value="{{ $pengajuan['nama_ttd'] }}">
                                             </div>
 
                                             <div class="input-field col s12">
                                                 <label for="tujuan">Tujuan Surat*</label>
-                                                <input class="validate" required aria-required="true" id="tujuan"
-                                                    name="tujuan_surat" type="text">
+                                                <input class="validate" required aria-required="true" id="tujuan" name="tujuan_surat" type="text">
                                                 <div class="input-field"></div>
                                             </div>
 
@@ -180,6 +173,27 @@
                                             <div class="input-field col s3">
                                                 <label for="">Margin Bawah (mm)</label>
                                                 <input class="validate" required aria-required="true" value="10" name="m_bawah" type="number">
+                                            </div>
+
+                                            <div class="col s4">
+                                                <label for="">Orientasi Halaman</label>
+                                                <select class="error validate" name="orientasi_hal" aria-required="true" required>
+                                                    <option value="landscape">Landscape</option>
+                                                    <option value="potrait" selected>Potrait</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col s4">
+                                                <label for="">Ukuran Halaman</label>
+                                                <select class="error validate" name="ukuran_hal" aria-required="true" required>
+                                                    <option value="A4" selected>A4</option>
+                                                    <option value="F4">F4</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col s4">
+                                                <label for="">Ukuran TTD (px)</label>
+                                                <input class="validate" required aria-required="true" value="220" name="ukuran_ttd" type="number">
                                             </div>
 
                                             <div class="col s12">
