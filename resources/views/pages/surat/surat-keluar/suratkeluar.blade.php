@@ -54,17 +54,19 @@
                                                     <th>Nomor Surat</th>
                                                     <th>Perihal</th>
                                                     <th>Klasifikasi</th>
-                                                    <th>Status</th>
+                                                    <th>Validator</th>
+                                                    <th>TTD</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach($sk as $k)
                                                 <tr>
-                                                    <td class="text-uppercase">{{ $k->no_sk }}</td>
+                                                    <td class="text-uppercase">{{ $k->nomor_surat }}</td>
                                                     <td class="text-capitalize">{{ $k->perihal }}</td>
                                                     <td class="text-capitalize">{{ $k->klasifikasi }}</td>
-                                                    <td class="text-capitalize">{{ $k->status }}</td>
+                                                    <td class="text-capitalize">{{ $k->status_surat }}</td>
+                                                    <td class="text-capitalize">{{ $k->status_ttd }}</td>
                                                     <td>
                                                         <div class="row">
                                                             <div class="col s2">
