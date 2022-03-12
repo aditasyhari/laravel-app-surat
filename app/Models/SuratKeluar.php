@@ -11,4 +11,8 @@ class SuratKeluar extends Model
     protected $table = 'surat_keluar';
     protected $primaryKey = 'id_surat_keluar';
     protected $guarded = [];
+
+    public function validator() {
+        return $this->belongsTo(User::class, 'id_validator');
+    }
 }

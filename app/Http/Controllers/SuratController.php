@@ -128,20 +128,73 @@ class SuratController extends Controller
 
     public function validasiSk()
     {
-        $sk = SuratKeluar::where('id_validator', Auth::user()->id_user)
-            ->orderBy('read_validator', 'asc')
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        return view('pages.surat.validasi', compact('sk'));
+        try {
+            $sk = SuratKeluar::where('id_validator', Auth::user()->id_user)
+                ->orderBy('read_validator', 'asc')
+                ->orderBy('created_at', 'desc')
+                ->get();
+    
+            return view('pages.surat.validasi', compact('sk'));
+        } catch (Exception $e) {
+            return view('error.500');
+        }
     }
 
     public function persetujuanTtd()
     {
-        $sk = SuratKeluar::where('id_ttd', Auth::user()->id_user)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        try {
+            $sk = SuratKeluar::where('id_ttd', Auth::user()->id_user)
+                ->orderBy('created_at', 'desc')
+                ->get();
+    
+            return view('pages.surat.persetujuan-ttd', compact('sk'));
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
 
-        return view('pages.surat.persetujuan-ttd', compact('sk'));
+    public function detailSk($id)
+    {
+        try {
+            $sk = SuratKeluar::with('validator')->find($id);
+
+            return view('pages.surat.surat-keluar.detail', compact('sk'));
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
+    public function detailValidasiSk($id)
+    {
+        try {
+            $sk = SuratKeluar::with('validator')->find($id);
+
+            return view('pages.surat.detail-validasi', compact('sk'));
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
+    public function submitValidasiSk(Request $request)
+    {
+        try {
+            $sk = SuratKeluar::find($request->id_surat_keluar);
+            $status_surat = $request->status_surat;
+
+            $update = [
+                'status_surat' => $status_surat,
+                'revisi' => ""
+            ];
+
+            if($status_surat == 'revisi') {
+                $update['revisi'] = $request->revisi;
+            }
+
+            $sk->update($update);
+
+            return redirect('validasi-sk')->with('status', 'Berhasil validasi surat.');
+        } catch (Exception $e) {
+            return view('error.500');
+        }
     }
 }

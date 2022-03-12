@@ -56,7 +56,8 @@ Route::middleware('auth')->group(function() {
     Route::delete('surat-keluar/delete-surat/{id}', [SuratController::class, 'deleteSk']);
 
     Route::get('validasi-sk', [SuratController::class, 'validasiSk']);
-    Route::get('validasi-sk/detail-surat/{id}', [SuratController::class, 'detailSk']);
+    Route::get('validasi-sk/detail-surat/{id}', [SuratController::class, 'detailValidasiSk']);
+    Route::post('validasi-sk/detail-surat/validasi', [SuratController::class, 'submitValidasiSk']);
     
     Route::get('persetujuan-ttd', [SuratController::class, 'persetujuanTtd']);
 
