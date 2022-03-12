@@ -30,7 +30,7 @@ class SuratController extends Controller
         if(Auth::user()->role == 'admin') {
             $sk = SuratKeluar::orderBy('updated_at', 'desc')->get();
         } else {
-            $sk = SuratKeluar::where('id_user', Auth::user()->id_user)->orderBy('updated_at', 'desc')->get();
+            $sk = SuratKeluar::where('id_pembuat', Auth::user()->id_user)->orderBy('updated_at', 'desc')->get();
         }
 
         return view('pages.surat.surat-keluar.suratkeluar', compact('sk'));
@@ -124,5 +124,24 @@ class SuratController extends Controller
         } catch (Exception $e) {
             return view('error.500');
         }
+    }
+
+    public function validasiSk()
+    {
+        $sk = SuratKeluar::where('id_validator', Auth::user()->id_user)
+            ->orderBy('read_validator', 'asc')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('pages.surat.validasi', compact('sk'));
+    }
+
+    public function persetujuanTtd()
+    {
+        $sk = SuratKeluar::where('id_ttd', Auth::user()->id_user)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('pages.surat.persetujuan-ttd', compact('sk'));
     }
 }

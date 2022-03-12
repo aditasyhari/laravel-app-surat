@@ -25,6 +25,18 @@
             <span class="menu-title" data-i18n="">Surat Keluar</span>
         </a>
     </li>
+    <li class="bold">
+        <a class="waves-effect waves-cyan {{ (request()->is('validasi-sk*')) ? 'active' : '' }}" href="{{url('validasi-sk')}}">
+            <i class="material-icons">done_outline</i>
+            <span class="menu-title" data-i18n="">Validasi Surat</span>
+        </a>
+    </li>
+    <li class="bold">
+        <a class="waves-effect waves-cyan {{ (request()->is('persetujuan-ttd*')) ? 'active' : '' }}" href="{{url('persetujuan-ttd')}}">
+            <i class="material-icons">person_tick_outline</i>
+            <span class="menu-title" data-i18n="">Persetujuan TTD</span>
+        </a>
+    </li>
 
     <li class="active bold">
         <a class="collapsible-header waves-effect waves-cyan {{ (request()->is('template-surat*')) ? 'active' : '' }}">

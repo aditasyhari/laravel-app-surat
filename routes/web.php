@@ -55,6 +55,11 @@ Route::middleware('auth')->group(function() {
     Route::put('surat-keluar/edit-surat/{id}', [SuratController::class, 'updateSk']);
     Route::delete('surat-keluar/delete-surat/{id}', [SuratController::class, 'deleteSk']);
 
+    Route::get('validasi-sk', [SuratController::class, 'validasiSk']);
+    Route::get('validasi-sk/detail-surat/{id}', [SuratController::class, 'detailSk']);
+    
+    Route::get('persetujuan-ttd', [SuratController::class, 'persetujuanTtd']);
+
     Route::get('profile', function () {
         return view('pages.profile.index');
     });
