@@ -236,4 +236,15 @@ class SuratController extends Controller
             return view('error.500');
         }
     }
+
+    public function deleteSk($id)
+    {
+        try {
+            SuratKeluar::destroy($id);
+            
+            return back()->with('status', 'Surat berhasil dihapus!');
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
 }
