@@ -110,7 +110,7 @@ class SuratController extends Controller
             $req['urutan'] = $nomor['urutan'];
 
             $param['perihal'] = $request->perihal;
-            $param['tujuan'] = $request->tujuan;
+            $param['tujuan'] = $request->tujuan_surat;
             $param['email_tujuan'] = $request->email_tujuan;
             $param['ukuran_ttd'] = $request->ukuran_ttd;
             $param['nomor_surat'] = $nomor['nomor_surat'];
@@ -168,6 +168,7 @@ class SuratController extends Controller
     {
         try {
             $sk = SuratKeluar::with('validator')->find($id);
+            $sk->update(['read_validator' => 1]);
 
             return view('pages.surat.detail-validasi', compact('sk'));
         } catch (Exception $e) {
@@ -193,6 +194,44 @@ class SuratController extends Controller
             $sk->update($update);
 
             return redirect('validasi-sk')->with('status', 'Berhasil validasi surat.');
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
+    public function editSk($id)
+    {
+        try {
+            $sk = SuratKeluar::with('validator')->find($id);
+
+            return view('pages.surat.surat-keluar.edit', compact('sk'));
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
+    public function updateSk(Request $request, $id)
+    {
+        try {
+            $req = $request->all();
+
+            $param = [];
+            $param['tgl_surat_fisik'] = $request->tgl_surat_fisik;
+            $param['perihal'] = $request->perihal;
+            $param['tujuan'] = $request->tujuan_surat;
+            $param['email_tujuan'] = $request->email_tujuan;
+            $param['ukuran_ttd'] = $request->ukuran_ttd;
+            $param['nomor_surat'] = $request->nomor_surat;
+            $param['konten'] = $request->layout_konten;
+
+            $req['layout_konten'] = variabelReplace($param);
+            $req['status_surat'] = 'pending';
+            $req['revisi'] = '';
+            $req['read_validator'] = 0;
+
+            SuratKeluar::find($id)->update($req);
+
+            return redirect('/surat-keluar')->with('status', 'Surat berhasil diperbarui!');
         } catch (Exception $e) {
             return view('error.500');
         }

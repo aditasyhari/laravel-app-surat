@@ -15,4 +15,8 @@ class SuratKeluar extends Model
     public function validator() {
         return $this->belongsTo(User::class, 'id_validator');
     }
+
+    public function ttd() {
+        return $this->belongsTo(User::class, 'id_ttd');
+    }
 }
