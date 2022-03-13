@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SuratController;
@@ -55,10 +56,15 @@ Route::middleware('auth')->group(function() {
     Route::put('surat-keluar/edit-surat/{id}', [SuratController::class, 'updateSk']);
     Route::delete('surat-keluar/delete-surat/{id}', [SuratController::class, 'deleteSk']);
 
+    // generate pdf
+    Route::post('surat-keluar/lihat-surat-pdf', [PdfController::class, 'lihatPdf']);
+
+    // validator
     Route::get('validasi-sk', [SuratController::class, 'validasiSk']);
     Route::get('validasi-sk/detail-surat/{id}', [SuratController::class, 'detailValidasiSk']);
     Route::post('validasi-sk/detail-surat/validasi', [SuratController::class, 'submitValidasiSk']);
     
+    // ttd
     Route::get('persetujuan-ttd', [SuratController::class, 'persetujuanTtd']);
 
     Route::get('profile', function () {

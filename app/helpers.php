@@ -1,7 +1,5 @@
 <?php
 
-use Str;
-use Auth;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\SuratKeluar;
@@ -117,7 +115,7 @@ function getBulanRomawi($bln){
 
 function nomorSurat($param) {
     $max = SuratKeluar::where('kode_klasifikasi', $param['kode'])->max('urutan');
-    $kode = Str::upper($param['kode']);
+    $kode = \Str::upper($param['kode']);
     $bulan = Carbon::parse($param['tgl_surat_fisik'])->format('m');
     $bulan_romawi = getBulanRomawi($bulan);
     $tahun = date("Y");
@@ -144,8 +142,8 @@ function variabelReplace($param) {
     $ukuran_ttd = $param['ukuran_ttd'];
     $nomor_surat = $param['nomor_surat'];
     $konten = $param['konten'];
-    $nama_pembuat = Auth::user()->nama;
-    $email_pembuat = Auth::user()->email;
+    $nama_pembuat = \Auth::user()->nama;
+    $email_pembuat = \Auth::user()->email;
     // $ttd = Auth::user()->ttd;
     // $ttd_img = '<img style="width:'.$ukuran_ttd.'px"'." src=https://$_SERVER[HTTP_HOST]/image/ttd/$ttd>";
 

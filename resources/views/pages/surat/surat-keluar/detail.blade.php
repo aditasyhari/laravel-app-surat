@@ -139,9 +139,11 @@
                                     @endif
                                     <div class="row">
                                         <div class="col s12">
-                                            <a href="#" target="_blank" class="btn waves-effect waves-light">
-                                                Lihat Surat
-                                            </a>
+                                            <form action="{{ url('surat-keluar/lihat-surat-pdf') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" value="{{ $sk->id_surat_keluar }}" name="id_surat_keluar">
+                                                <button type="submit" class="btn waves-effect waves-light">Lihat Surat</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
