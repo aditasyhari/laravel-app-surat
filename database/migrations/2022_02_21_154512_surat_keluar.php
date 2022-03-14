@@ -29,6 +29,7 @@ class SuratKeluar extends Migration
             $table->integer('m_kanan')->nullable();
             $table->integer('m_kiri')->nullable();
             $table->integer('urutan');
+            $table->longText('layout_konten_draft');
             $table->longText('layout_konten');
             $table->longText('layout_kop');
             $table->enum('status_surat', ['disetujui', 'ditolak', 'revisi', 'pending'])->default('pending');

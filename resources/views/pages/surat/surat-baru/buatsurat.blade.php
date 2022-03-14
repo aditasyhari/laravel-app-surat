@@ -104,7 +104,7 @@
                                 <hr>
                                 <br>
                                 <div id="html-view-validations">
-                                    <form class="formValidate0" id="formValidate0" method="post" action="{{ url('/surat-baru/non-template/buat') }}" enctype="multipart/form-data">
+                                    <form class="formValidate0" id="form-surat" method="post" action="" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
                                             <input type="hidden" value="{{ $pengajuan['id_pembuat'] }}" name="id_pembuat">
@@ -242,7 +242,8 @@
                                             </div>
 
                                             <div class="input-field col s12">
-                                                <button class="btn waves-effect green left" type="submit" id="btn-submit" disabled>
+                                                <button onclick="windowPreview()" class="btn">Preview</button>
+                                                <button class="btn waves-effect green" onclick="windowSubmit()" id="btn-submit" disabled>
                                                     Buat Surat
                                                 </button>
                                             </div>
@@ -298,6 +299,20 @@
         } else {
             btnSubmit.disabled = true
         }
+    }
+
+    let form_surat = document.getElementById('form-surat');
+
+    function windowPreview() {
+        form_surat.action = "/surat-keluar/preview";
+        form_surat.target = "_blank";
+        form_surat.submit();
+    }
+
+    function windowSubmit() {
+        form_surat.action = "";
+        form_surat.target = "";
+        form_surat.submit();
     }
 </script>
 

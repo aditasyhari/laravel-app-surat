@@ -11,7 +11,7 @@
     tinymce.init({
         selector: '#layout_konten',
         height: 500,
-        plugins: 'lineheight style fullpage print preview powerpaste casechange searchreplace autosave save directionality advcode visualblocks visualchars fullscreen table charmap hr nonbreaking toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter permanentpen charmap mentions',
+        plugins: 'lineheight style print preview powerpaste casechange searchreplace autosave save directionality advcode visualblocks visualchars fullscreen table charmap hr nonbreaking toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter permanentpen charmap mentions',
         theme: 'silver',
         convert_fonts_to_spans : false,  
         toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify lineheight | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | charmap | fullscreen  preview save print | a11ycheck',
@@ -22,7 +22,7 @@
     tinymce.init({
         selector: '#layout_kop',
         height: 350,
-        plugins: 'hr image lineheight style fullpage print preview powerpaste casechange searchreplace autosave save directionality advcode visualblocks visualchars fullscreen table charmap hr nonbreaking toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter permanentpen charmap mentions',
+        plugins: 'hr image lineheight style print preview powerpaste casechange searchreplace autosave save directionality advcode visualblocks visualchars fullscreen table charmap hr nonbreaking toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter permanentpen charmap mentions',
         theme: 'silver',
         convert_fonts_to_spans : false,
         toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify lineheight hr | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | charmap | fullscreen  preview save print | a11ycheck image',
@@ -101,7 +101,7 @@
                                 <hr>
                                 <br>
                                 <div id="html-view-validations">
-                                    <form class="formValidate0" id="formValidate0" method="post" action="" enctype="multipart/form-data">
+                                    <form class="formValidate0" id="form-surat" method="post" action="" enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
                                         <div class="row">
@@ -221,7 +221,7 @@
 
                                             <div class="col s12">
                                                 <label for="mytextarea">Isi Surat*</label>
-                                                <textarea id="layout_konten" name="layout_konten" required>{{ $sk->layout_konten }}</textarea>
+                                                <textarea id="layout_konten" name="layout_konten" required>{{ $sk->layout_konten_draft }}</textarea>
                                             </div>
 
                                             <div class="progress">
@@ -240,7 +240,8 @@
                                             </div>
 
                                             <div class="input-field col s12">
-                                                <button class="btn waves-effect green left" type="submit" id="btn-submit" disabled>
+                                                <button onclick="windowPreview()" class="btn">Preview</button>
+                                                <button class="btn waves-effect green" onclick="windowSubmit()" id="btn-submit" disabled>
                                                     Update Surat
                                                 </button>
                                             </div>
@@ -252,7 +253,7 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- START RIGHT SIDEBAR NAV -->
+            </div>
         </div>
     </div>
 </div>
@@ -294,6 +295,20 @@
         } else {
             btnSubmit.disabled = true
         }
+    }
+
+    let form_surat = document.getElementById('form-surat');
+
+    function windowPreview() {
+        form_surat.action = "/surat-keluar/preview";
+        form_surat.target = "_blank";
+        form_surat.submit();
+    }
+
+    function windowSubmit() {
+        form_surat.action = "";
+        form_surat.target = "";
+        form_surat.submit();
     }
 </script>
 

@@ -116,6 +116,7 @@ class SuratController extends Controller
             $param['nomor_surat'] = $nomor['nomor_surat'];
             $param['konten'] = $request->layout_konten;
 
+            $req['layout_konten_draft'] = $request->layout_konten;
             $req['layout_konten'] = variabelReplace($param);
 
             SuratKeluar::create($req);
@@ -224,6 +225,7 @@ class SuratController extends Controller
             $param['nomor_surat'] = $request->nomor_surat;
             $param['konten'] = $request->layout_konten;
 
+            $req['layout_konten_draft'] = $request->layout_konten;
             $req['layout_konten'] = variabelReplace($param);
             $req['status_surat'] = 'pending';
             $req['revisi'] = '';

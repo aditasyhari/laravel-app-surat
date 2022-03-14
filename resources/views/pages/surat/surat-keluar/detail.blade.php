@@ -139,10 +139,10 @@
                                     @endif
                                     <div class="row">
                                         <div class="col s12">
-                                            <form action="{{ url('surat-keluar/lihat-surat-pdf') }}" method="POST">
+                                            <form action="{{ url('surat-keluar/lihat-surat-pdf') }}" method="post" target="_blank">
                                                 @csrf
                                                 <input type="hidden" value="{{ $sk->id_surat_keluar }}" name="id_surat_keluar">
-                                                <button type="submit" class="btn waves-effect waves-light">Lihat Surat</button>
+                                                <button type="submit" class="btn waves-effect waves-light" {{ $sk->status_surat != 'disetujui' ? 'disabled' : '' }}>Lihat / Cetak</button>
                                             </form>
                                         </div>
                                     </div>

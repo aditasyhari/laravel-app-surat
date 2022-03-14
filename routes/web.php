@@ -57,6 +57,8 @@ Route::middleware('auth')->group(function() {
     Route::delete('surat-keluar/delete-surat/{id}', [SuratController::class, 'deleteSk']);
 
     // generate pdf
+    Route::post('surat-keluar/preview', [PdfController::class, 'preview']);
+    Route::put('surat-keluar/preview', [PdfController::class, 'preview']);
     Route::post('surat-keluar/lihat-surat-pdf', [PdfController::class, 'lihatPdf']);
 
     // validator
