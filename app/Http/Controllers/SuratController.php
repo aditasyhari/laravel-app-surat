@@ -200,6 +200,29 @@ class SuratController extends Controller
         }
     }
 
+    public function submitTtdSk(Request $request)
+    {
+        try {
+            $sk = SuratKeluar::find($request->id_surat_keluar);
+
+            $param = [
+                'ukuran_ttd' => $sk->ukuran_ttd,
+                'konten' => $sk->layout_konten
+            ];
+
+            $update = [
+                'status_ttd' => 'disetujui',
+                'layout_konten' => replaceTtd($param)
+            ];
+
+            $sk->update($update);
+
+            return redirect('persetujuan-ttd')->with('status', 'Berhasil validasi surat.');
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
     public function editSk($id)
     {
         try {

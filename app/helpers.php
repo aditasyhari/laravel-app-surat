@@ -144,11 +144,23 @@ function variabelReplace($param) {
     $konten = $param['konten'];
     $nama_pembuat = \Auth::user()->nama;
     $email_pembuat = \Auth::user()->email;
-    // $ttd = Auth::user()->ttd;
-    // $ttd_img = '<img style="width:'.$ukuran_ttd.'px"'." src=https://$_SERVER[HTTP_HOST]/image/ttd/$ttd>";
 
     $variabel = array('=NoSurat=', '=Nama=', '=Email=', '=Perihal=', '=TglSurat=', '=Tujuan=', '=EmailTujuan=');
     $replace = array($nomor_surat, $nama_pembuat, $email_pembuat, $perihal, tglIndo($tgl_surat_fisik), $tujuan, $email_tujuan);
+
+    $konten_surat = str_replace($variabel, $replace, $konten);
+
+    return $konten_surat;
+}
+
+function replaceTtd($param) {
+    $ukuran_ttd = $param['ukuran_ttd'];
+    $konten = $param['konten'];
+    $ttd = Auth::user()->ttd;
+    $ttd_img = '<img style="width:'.$ukuran_ttd.'px"'." src=http://$_SERVER[HTTP_HOST]/image/ttd/$ttd >";
+
+    $variabel = array('=TTD=');
+    $replace = array($ttd_img);
 
     $konten_surat = str_replace($variabel, $replace, $konten);
 

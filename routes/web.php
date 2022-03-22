@@ -60,6 +60,7 @@ Route::middleware('auth')->group(function() {
     Route::post('surat-keluar/preview', [PdfController::class, 'preview']);
     Route::put('surat-keluar/preview', [PdfController::class, 'preview']);
     Route::post('surat-keluar/lihat-surat-pdf', [PdfController::class, 'lihatPdf']);
+    Route::post('surat-keluar/lihat-surat-pdf-draft', [PdfController::class, 'lihatPdfDraft']);
 
     // validator
     Route::get('validasi-sk', [SuratController::class, 'validasiSk']);
@@ -68,6 +69,8 @@ Route::middleware('auth')->group(function() {
     
     // ttd
     Route::get('persetujuan-ttd', [SuratController::class, 'persetujuanTtd']);
+    Route::get('persetujuan-ttd/detail-surat/{id}', [SuratController::class, 'detailValidasiSk']);
+    Route::post('persetujuan-ttd/detail-surat/ttd', [SuratController::class, 'submitTtdSk']);
 
     Route::get('profile', function () {
         return view('pages.profile.index');

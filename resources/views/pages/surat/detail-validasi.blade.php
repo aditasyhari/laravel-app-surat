@@ -137,7 +137,8 @@
                                         </div>
                                     </div>
                                     @endif
-                                    <form action="{{ url('validasi-sk/detail-surat/validasi') }}" method="POST">
+                                    @if (Request::is('validasi-sk/*'))
+                                    <form id="form-surat" action="{{ url('validasi-sk/detail-surat/validasi') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="id_surat_keluar" value="{{ $sk->id_surat_keluar }}">
                                         <div class="row">
@@ -156,15 +157,34 @@
                                                 <label for="">Revisi</label>
                                                 <textarea name="revisi" class="materialize-textarea" required>isi revisi</textarea>
                                             </div>
-                                            <div class="mb-20"></div>
-                                            <div class="col s12">
-                                                <a href="#" target="_blank" class="btn btn-small waves-effect waves-light gradient-45deg-amber-amber" title="Lihat Surat">
-                                                    <i class="material-icons">visibility</i>
-                                                </a>
-                                                <button type="submit" class="btn btn-small">Validasi</button>
-                                            </div>
                                         </div>
+                                        <button type="submit" class="btn waves-effect green">Validasi</button>
                                     </form>
+                                    @endif
+                                    <div class="mb-20"></div>
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <form action="{{ url('surat-keluar/lihat-surat-pdf-draft') }}" method="post" target="_blank">
+                                                @csrf
+                                                <input type="hidden" name="id_surat_keluar" value="{{ $sk->id_surat_keluar }}">
+                                                <button type="submit" class="btn waves-effect waves-light">
+                                                    <i class="material-icons">visibility</i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    @if (Request::is('persetujuan-ttd/*'))
+                                    <div class="mb-20"></div>
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <form action="{{ url('persetujuan-ttd/detail-surat/ttd') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="id_surat_keluar" value="{{ $sk->id_surat_keluar }}">
+                                                <button type="submit" class="btn waves-effect green">Ttd</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -185,5 +205,4 @@
         document.getElementById('revisi').style.display = style;
     });
 </script>
-
 @endpush
