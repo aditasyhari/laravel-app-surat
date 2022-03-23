@@ -20,7 +20,7 @@
                     <ol class="breadcrumbs mb-0">
                         <li class="breadcrumb-item"><a href="index-2.html">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item active">Template Surat
+                        <li class="breadcrumb-item active">Daftar Template Surat
                         </li>
                     </ol>
                 </div>
@@ -52,13 +52,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($template as $tp)
                                                 <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
+                                                    <td>{{ $tp->nama_template }}</td>
+                                                    <td>{{ $tp->status_template }}</td>
+                                                    <td>{{ tglIndo($tp->created_at) }}</td>
                                                     <td>
                                                         <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-amber-amber" title="detail">
-                                                            <i class="material-icons">print</i>
+                                                            <i class="material-icons">details</i>
                                                         </a>
                                                         <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-green-teal" title="edit">
                                                             <i class="material-icons">edit</i>
@@ -68,6 +69,7 @@
                                                         </a>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\KlasifikasiController;
+use App\Http\Controllers\TemplateSuratController;
 use App\Http\Controllers\ArsipSuratMasukController;
 use App\Http\Controllers\ArsipSuratKeluarController;
 
@@ -79,12 +80,9 @@ Route::middleware('auth')->group(function() {
     Route::put('profile/update/{id}', [UserController::class, 'profileUpdate']);
 
     Route::prefix('template-surat')->group(function () {
-        Route::get('daftar-template', function () {
-            return view('pages.template.daftar');
-        });
-        Route::get('template-approval', function () {
-            return view('pages.template.approval');
-        });
+        Route::get('daftar-template', [TemplateSuratController::class, 'daftarTemplate']);
+
+        Route::get('template-approval', [TemplateSuratController::class, 'approvalTemplate']);
     });
 
     Route::middleware('admin')->group(function() {

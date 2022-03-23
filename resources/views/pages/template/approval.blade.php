@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/data-tables/css/select.dataTables.min.css')}}">
 @endpush
 @section('title')
-Approval Template
+    Approval Template
 @endsection
 @section('content')
 <div class="row">
@@ -38,8 +38,6 @@ Approval Template
                     <div class="col s12">
                         <div class="card">
                             <div class="card-content">
-                                <a href="#"
-                                    class="waves-effect waves-light  btn gradient-45deg-light-blue-cyan box-shadow-none border-round mr-1 mb-1 right">Tambah</a>
                                 <h4 class="card-title">Data Approval Template</h4>
                                 <div class="row">
                                     <div class="col s12">
@@ -53,10 +51,11 @@ Approval Template
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($template as $tp)
                                                 <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
+                                                    <td>{{ $tp->nama_template }}</td>
+                                                    <td>{{ $tp->status_template }}</td>
+                                                    <td>{{ tglIndo($tp->created_at) }}</td>
                                                     <td>
                                                         <div class="col">
                                                             <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-amber-amber"
@@ -66,7 +65,7 @@ Approval Template
                                                         </div>
                                                         <div class="col">
                                                             <div class="input-field col s12">
-                                                                <button class="btn waves-effect green left"
+                                                                <button class="btn btn-small waves-effect green left"
                                                                     type="submit" name="action">
                                                                     Approval
                                                                 </button>
@@ -74,6 +73,7 @@ Approval Template
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
