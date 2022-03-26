@@ -31,7 +31,7 @@ class Template extends Migration
             $table->unsignedBigInteger('id_klasifikasi');
             $table->unsignedBigInteger('id_pembuat');
             $table->unsignedBigInteger('id_validator');
-            $table->unsignedBigInteger('id_ttd');
+            $table->unsignedBigInteger('id_ttd')->nullable();
             $table->timestamps();
             $table->foreign('id_klasifikasi')->references('id_klasifikasi')->on('klasifikasi')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_pembuat')->references('id_user')->on('user')->onDelete('cascade')->onUpdate('cascade');

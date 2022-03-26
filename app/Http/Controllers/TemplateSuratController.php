@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Template;
+use App\Models\User;
+use App\Models\Klasifikasi;
 use Exception;
 use Validator;
 use Auth;
@@ -21,6 +23,62 @@ class TemplateSuratController extends Controller
             ->get();
             
             return view('pages.template.daftar', compact(['template']));
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
+    public function tambahTemplate(Request $request)
+    {
+        try {
+            if($request->isMethod('get')) {
+                $validator = User::select('id_user', 'nama')->get();
+                $klasifikasi = Klasifikasi::select('id_klasifikasi', 'nama')->get();
+    
+                return view('pages.template.tambah', compact(['validator', 'klasifikasi']));
+            } else {
+                $input = $request->all();
+                $input['id_pembuat'] = Auth::user()->id_user;
+
+                Template::create($input);
+
+                return redirect('/template-surat/daftar-template');
+            }
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
+    public function editTemplate(Request $request, $id)
+    {
+        try {
+            if($request->isMethod('get')) {
+                $template = Template::find($id);
+                $validator = User::select('id_user', 'nama')->get();
+                $klasifikasi = Klasifikasi::select('id_klasifikasi', 'nama')->get();
+    
+                return view('pages.template.edit', compact(['template', 'validator', 'klasifikasi']));
+            } else {
+                $input = $request->all();
+                $input['status_template'] = 'pending';
+                $input['read_validator'] = 0;
+                $input['revisi'] = '';
+
+                Template::find($id)->update($input);
+
+                return redirect('/template-surat/daftar-template');
+            }
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
+    public function deleteTemplate($id)
+    {
+        try {
+            Template::destroy($id);
+            
+            return redirect('/template-surat/daftar-template');
         } catch (Exception $e) {
             return view('error.500');
         }

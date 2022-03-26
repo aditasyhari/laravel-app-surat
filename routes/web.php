@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function() {
     Route::delete('surat-keluar/delete-surat/{id}', [SuratController::class, 'deleteSk']);
 
     // generate pdf
+    Route::post('template-surat/preview', [PdfController::class, 'previewTemplate']);
     Route::post('surat-keluar/preview', [PdfController::class, 'preview']);
     Route::put('surat-keluar/preview', [PdfController::class, 'preview']);
     Route::post('surat-keluar/lihat-surat-pdf', [PdfController::class, 'lihatPdf']);
@@ -80,9 +81,14 @@ Route::middleware('auth')->group(function() {
     Route::put('profile/update/{id}', [UserController::class, 'profileUpdate']);
 
     Route::prefix('template-surat')->group(function () {
-        Route::get('daftar-template', [TemplateSuratController::class, 'daftarTemplate']);
+        Route::get('daftar-template', [TemplateSuratController::class, 'daftarTemplate'])->name('daftar-template');
 
         Route::get('template-approval', [TemplateSuratController::class, 'approvalTemplate']);
+        Route::get('edit-template/{id}', [TemplateSuratController::class, 'editTemplate']);
+        Route::put('edit-template/{id}', [TemplateSuratController::class, 'editTemplate']);
+        Route::delete('delete/{id}', [TemplateSuratController::class, 'deleteTemplate']);
+        Route::get('tambah-template', [TemplateSuratController::class, 'tambahTemplate']);
+        Route::post('tambah-template', [TemplateSuratController::class, 'tambahTemplate']);
     });
 
     Route::middleware('admin')->group(function() {

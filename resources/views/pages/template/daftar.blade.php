@@ -37,8 +37,7 @@
                     <div class="col s12">
                         <div class="card">
                             <div class="card-content">
-                                <a href="#"
-                                class="waves-effect waves-light  btn gradient-45deg-light-blue-cyan box-shadow-none border-round mr-1 mb-1 right">Tambah</a>
+                                <a href="{{ url('template-surat/tambah-template') }}" class="waves-effect waves-light  btn gradient-45deg-light-blue-cyan box-shadow-none border-round mr-1 mb-1 right">Tambah</a>
                                 <h4 class="card-title">Data Template Surat</h4>
                                 <div class="row">
                                     <div class="col s12">
@@ -55,18 +54,26 @@
                                                 @foreach($template as $tp)
                                                 <tr>
                                                     <td>{{ $tp->nama_template }}</td>
-                                                    <td>{{ $tp->status_template }}</td>
+                                                    <td style="text-transform: uppercase;">{{ $tp->status_template }}</td>
                                                     <td>{{ tglIndo($tp->created_at) }}</td>
                                                     <td>
-                                                        <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-amber-amber" title="detail">
-                                                            <i class="material-icons">details</i>
-                                                        </a>
-                                                        <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-green-teal" title="edit">
-                                                            <i class="material-icons">edit</i>
-                                                        </a>
-                                                        <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-purple-deep-orange" title="delete">
+                                                        <div class="row">
+                                                            <div class="col s2">
+                                                                <a href="{{ url('template-surat/edit-template/'.$tp->id_template) }}" class="mb-6 btn-floating waves-effect waves-light gradient-45deg-green-teal" title="detail dan edit">
+                                                                    <i class="material-icons">edit</i>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col s2">
+                                                                <form method="POST" action="{{ url('template-surat/delete/'.$tp->id_template) }}">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button class="mb-6 btn-floating waves-effect waves-light gradient-45deg-purple-deep-orange show_confirm" title="Hapus Data"><i class="material-icons">delete</i></button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-purple-deep-orange" title="delete">
                                                             <i class="material-icons">delete</i>
-                                                        </a>
+                                                        </a> -->
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -89,7 +96,29 @@
 <script src="{{asset('app-assets/vendors/sparkline/jquery.sparkline.min.js')}}"></script>
 <script src="{{asset('app-assets/js/scripts/card-advanced.js')}}" type="text/javascript"></script>
 <script src="{{asset('app-assets/vendors/data-tables/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('app-assets/vendors/data-tables/js/dataTables.select.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('app-assets/js/scripts/data-tables.js')}}" type="text/javascript"></script>
+<script src="{{asset('app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('app-assets/vendors/data-tables/js/dataTables.select.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('app-assets/js/scripts/data-tables.js')}}" type="text/javascript"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+    $('.show_confirm').click(function(event) {
+        var form =  $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+            title: `Anda yakin menghapus data ini?`,
+            text: "Jika anda hapus, data akan hilang.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            form.submit();
+        }
+        });
+    });
+</script>
 @endpush

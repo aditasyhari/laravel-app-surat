@@ -11,6 +11,27 @@ use Dompdf;
 class PdfController extends Controller
 {
     //
+    public function previewTemplate(Request $request)
+    {
+        try {
+            $data = [
+                'nomor_surat' => 'Template Surat',
+                'm_atas' => $request->m_atas,
+                'm_bawah' => $request->m_bawah,
+                'm_kanan' => $request->m_kanan,
+                'm_kiri' => $request->m_kiri,
+                'layout_kop' => $request->layout_kop,
+                'layout_konten' => $request->layout_konten
+            ];
+
+            $pdf = PDF::loadView('pdf.show', $data)->setPaper($request->ukuran_hal, $request->orientasi_hal);
+
+            return $pdf->stream("preview.pdf", array("Attachment" => false));
+        } catch (exception $e) {
+            return view('error.500');
+        }
+    }
+
     public function preview(Request $request)
     {
         try {
