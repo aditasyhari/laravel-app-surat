@@ -84,6 +84,9 @@ Route::middleware('auth')->group(function() {
         Route::get('daftar-template', [TemplateSuratController::class, 'daftarTemplate'])->name('daftar-template');
 
         Route::get('template-approval', [TemplateSuratController::class, 'approvalTemplate']);
+        Route::post('template-approval/detail', [TemplateSuratController::class, 'detailApprovalTemplate']);
+        Route::post('template-approval/detail/approval', [TemplateSuratController::class, 'approval']);
+        Route::post('template-approval/preview', [PdfController::class, 'previewApproval']);
         Route::get('edit-template/{id}', [TemplateSuratController::class, 'editTemplate']);
         Route::put('edit-template/{id}', [TemplateSuratController::class, 'editTemplate']);
         Route::delete('delete/{id}', [TemplateSuratController::class, 'deleteTemplate']);

@@ -77,7 +77,7 @@ class TemplateSuratController extends Controller
     {
         try {
             Template::destroy($id);
-            
+
             return redirect('/template-surat/daftar-template');
         } catch (Exception $e) {
             return view('error.500');
@@ -95,6 +95,32 @@ class TemplateSuratController extends Controller
             ->get();
             
             return view('pages.template.approval', compact(['template']));
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
+    public function detailApprovalTemplate(Request $request)
+    {
+        try {
+            $tp = Template::find($request->id_template);
+            $tp->update([
+                'read_validator' => 0
+            ]);
+
+            return view('pages.template.detail-approval', compact(['tp']));
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
+    public function approval(Request $request)
+    {
+        try {
+            $template = Template::find($request->id_template);
+            $template->update($request->except(['id_template']));
+
+            return redirect('/template-surat/template-approval');
         } catch (Exception $e) {
             return view('error.500');
         }

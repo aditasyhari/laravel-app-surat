@@ -54,22 +54,29 @@
                                                 @foreach($template as $tp)
                                                 <tr>
                                                     <td>{{ $tp->nama_template }}</td>
-                                                    <td>{{ $tp->status_template }}</td>
+                                                    <td style="text-transform: uppercase;">{{ $tp->status_template }}</td>
                                                     <td>{{ tglIndo($tp->created_at) }}</td>
                                                     <td>
-                                                        <div class="col">
-                                                            <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-amber-amber"
-                                                                title="detail">
-                                                                <i class="material-icons">print</i>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <div class="input-field col s12">
-                                                                <button class="btn btn-small waves-effect green left"
-                                                                    type="submit" name="action">
-                                                                    Approval
-                                                                </button>
+                                                        <div class="row">
+                                                            <div class="col s2">
+                                                                <form action="{{ url('/template-surat/template-approval/detail') }}" method="post">
+                                                                    @csrf
+                                                                    <input type="hidden" name="id_template" value="{{ $tp->id_template }}">
+                                                                    <button type="submit" class="mb-6 btn-floating waves-effect waves-light gradient-45deg-amber-amber">
+                                                                        <i class="material-icons">details</i> Detail
+                                                                    </button>
+                                                                </form>
                                                             </div>
+                                                            <!-- <div class="col s3">
+                                                                <form id="form-approval" action="{{ url('') }}" method="post">
+                                                                    @csrf
+                                                                    <input type="hidden" name="id_template" value="{{ $tp->id_template }}">
+                                                                    <button class="show_confirm btn waves-effect green left"
+                                                                        type="submit" name="action">
+                                                                        Approval
+                                                                    </button>
+                                                                </form>
+                                                            </div> -->
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -97,4 +104,26 @@
     type="text/javascript"></script>
 <script src="{{asset('app-assets/vendors/data-tables/js/dataTables.select.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('app-assets/js/scripts/data-tables.js')}}" type="text/javascript"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+    $('.show_confirm').click(function(event) {
+        var form =  $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+            title: `Yakin menyetujui template ini?`,
+            text: "Jika anda sudah meyetujui, template bisa dipublish/digunakan.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            form.submit();
+        }
+        });
+    });
+</script>
 @endpush

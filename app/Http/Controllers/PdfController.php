@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SuratKeluar;
+use App\Models\Template;
 use Exception;
 use PDF;
 use Dompdf;
@@ -25,6 +26,31 @@ class PdfController extends Controller
             ];
 
             $pdf = PDF::loadView('pdf.show', $data)->setPaper($request->ukuran_hal, $request->orientasi_hal);
+
+            return $pdf->stream("preview.pdf", array("Attachment" => false));
+        } catch (exception $e) {
+            return view('error.500');
+        }
+    }
+
+    public function previewApproval(Request $request)
+    {
+        try {
+            $template = Template::find($request->id_template);
+            $template->update([
+                'read_validator' => 1
+            ]);
+            $data = [
+                'nomor_surat' => 'Template Surat',
+                'm_atas' => $template->m_atas,
+                'm_bawah' => $template->m_bawah,
+                'm_kanan' => $template->m_kanan,
+                'm_kiri' => $template->m_kiri,
+                'layout_kop' => $template->layout_kop,
+                'layout_konten' => $template->layout_konten
+            ];
+
+            $pdf = PDF::loadView('pdf.show', $data)->setPaper($template->ukuran_hal, $template->orientasi_hal);
 
             return $pdf->stream("preview.pdf", array("Attachment" => false));
         } catch (exception $e) {
