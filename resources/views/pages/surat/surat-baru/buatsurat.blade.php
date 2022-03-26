@@ -119,7 +119,7 @@
                                                 <div class="input-field"></div>
                                             </div>
 
-                                            <div class="input-field col s12">
+                                            <div class="input-field col s6">
                                                 <input type="date" class="datepicker" value="{{ $pengajuan['tgl_surat_fisik'] }}" readonly name="tgl_surat_fisik">
                                                 <label for="dob">Tanggal Surat Fisik*</label>
                                                 <div class="input-field"></div>
@@ -131,11 +131,11 @@
                                                 <input class="validate" readonly aria-required="true" type="text" value="{{ $pengajuan['nama_validator'] }}">
                                             </div>
 
-                                            <div class="input-field col s6">
+                                            {{-- <div class="input-field col s6">
                                                 <label for="status">Persetujuan TTD*</label>
                                                 <input name="id_ttd" type="hidden" value="{{ $pengajuan['id_ttd'] }}">
                                                 <input class="validate" readonly aria-required="true" type="text" value="{{ $pengajuan['nama_ttd'] }}">
-                                            </div>
+                                            </div> --}}
 
                                             <div class="input-field col s12">
                                                 <label for="tujuan">Tujuan Surat*</label>
@@ -191,10 +191,10 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col s4">
+                                            <!-- <div class="col s4">
                                                 <label for="">Ukuran TTD (px)</label>
                                                 <input class="validate" required aria-required="true" value="220" name="ukuran_ttd" type="number">
-                                            </div>
+                                            </div> -->
 
                                             <div class="col s12">
                                                 <label for="mytextarea">Kop Surat* (size gambar/logo harus kurang dari 1 mb)</label>
@@ -217,7 +217,7 @@
                                                     <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('tglsurat')">Tgl Surat</button>
                                                     <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('tujuan')">Tujuan</button>
                                                     <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('emailtujuan')">Email Tujuan</button>
-                                                    <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('ttd')">TTD</button>
+                                                    <!-- <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('ttd')">TTD</button> -->
                                                 </div>
                                             </div>
 

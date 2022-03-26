@@ -63,7 +63,7 @@ class SuratController extends Controller
 
                 $nomor = nomorSurat($param);
                 $validator = User::select('nama')->find($request->id_validator);
-                $ttd = User::select('nama')->find($request->id_ttd);
+                // $ttd = User::select('nama')->find($request->id_ttd);
 
                 $pengajuan = [
                     'nomor_surat' => $nomor['nomor_surat'],
@@ -72,9 +72,9 @@ class SuratController extends Controller
                     'nama_klasifikasi' => $klasifikasi->nama,
                     'id_pembuat' => Auth::user()->id_user,
                     'id_validator' => $request->id_validator,
-                    'id_ttd' => $request->id_ttd,
-                    'nama_ttd' => $ttd->nama,
-                    'nama_validator' => $ttd->nama,
+                    // 'id_ttd' => $request->id_ttd,
+                    // 'nama_ttd' => $ttd->nama,
+                    'nama_validator' => $validator->nama,
                 ];
 
                 return redirect()->route('surat-nontemplate', ['pengajuan' => $pengajuan]);

@@ -71,7 +71,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col s12">
+                                            <!-- <div class="col s12">
                                                 <label for="role">Penandatangan Surat*</label>
                                                 <select class="error validate" id="id_ttd" name="id_ttd" aria-required="true" required>
                                                     <option disabled selected>Pilih
@@ -82,7 +82,7 @@
                                                 </select>
                                                 <div class="input-field">
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="input-field col s12">
                                                 <input type="date" class="datepicker" name="tgl_surat_fisik" required>

@@ -4,9 +4,9 @@
         <div class="nav-wrapper">
 
             <ul class="navbar-list right">
-                <li><a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);"
+                <!-- <li><a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);"
                         data-target="notifications-dropdown"><i class="material-icons">notifications_none<small
-                                class="notification-badge">5</small></i></a></li>
+                                class="notification-badge">5</small></i></a></li> -->
 
                 @if (Auth::user()->foto == true)
                     <li><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);"
@@ -23,7 +23,7 @@
 
             </ul>
             <!-- notifications-dropdown-->
-            <ul class="dropdown-content" id="notifications-dropdown">
+            <!-- <ul class="dropdown-content" id="notifications-dropdown">
                 <li>
                     <h6>NOTIFICATIONS<span class="new badge">5</span></h6>
                 </li>
@@ -45,7 +45,7 @@
                             class="material-icons icon-bg-circle deep-orange small">assistant</span> aprov ttd</a>
                     <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">6 baru</time>
                 </li>
-            </ul>
+            </ul> -->
             <!-- profile-dropdown-->
             <ul class="dropdown-content" id="profile-dropdown">
                 <li><a class="grey-text text-darken-1" href="{{url('profile')}}"><i

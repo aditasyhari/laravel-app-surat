@@ -22,7 +22,7 @@ class SuratKeluar extends Migration
             $table->string('tujuan_surat');
             $table->string('email_tujuan');
             $table->string('ukuran_hal');
-            $table->integer('ukuran_ttd');
+            $table->integer('ukuran_ttd')->nullable();
             $table->string('orientasi_hal');
             $table->integer('m_atas')->nullable();
             $table->integer('m_bawah')->nullable();
@@ -41,7 +41,7 @@ class SuratKeluar extends Migration
             $table->unsignedBigInteger('id_pembuat');
             $table->unsignedBigInteger('id_validator');
             $table->unsignedBigInteger('id_template')->nullable();
-            $table->unsignedBigInteger('id_ttd');
+            $table->unsignedBigInteger('id_ttd')->nullable();
             $table->timestamps();
 
             $table->foreign('id_pembuat')->references('id_user')->on('user')->onDelete('cascade')->onUpdate('cascade');
