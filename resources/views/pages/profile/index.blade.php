@@ -26,7 +26,7 @@ Profile
     <div class="col s12">
         <div class="container">
             <div class="row user-profile mt-1">
-                <img class="responsive-img" alt="" src="{{asset('app-assets/images/gallery/search.jpg')}}">
+                <!-- <img class="responsive-img" alt="" src="{{asset('app-assets/images/gallery/search.jpg')}}"> -->
             </div>
             <div class="section" id="user-profile">
                 <div class="row">
@@ -42,7 +42,8 @@ Profile
                                     src="{{asset('app-assets/images/gallery/35.png')}}" alt="">
                                 @endif
                                 <br>
-                                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+                                <br>
+                                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Edit</a>
                                 {{-- modal --}}
                                 <div id="modal1" class="modal">
                                     <div class="modal-content">
@@ -75,11 +76,11 @@ Profile
                                                         type="file">
                                                 </div>
 
-                                                <div class="input-field col s12">
+                                                <!-- <div class="input-field col s12">
                                                     <label for="ttd">Tanda Tangan</label>
                                                     <input class="validate" required aria-required="true" id="ttd" name="ttd"
                                                         type="file">
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <button class="btn waves-effect waves-light right" type="submit"
                                                 name="action">Submit
@@ -105,9 +106,45 @@ Profile
                                                     <strong class="white-text">{{ $message }}</strong>
                                                 </div>
                                             @endif
-                                            <h5>{{ Auth::user()->nama }}</h5>
-                                            <h6>{{ Auth::user()->email }}</h6>
-                                            <p>{{ Auth::user()->nik }}</p>
+                                            <h6>
+                                                <div class="row">
+                                                    <div class="col s2">
+                                                        Nama
+                                                    </div>
+                                                    <div class="col s1">
+                                                        :
+                                                    </div>
+                                                    <div class="col s8">
+                                                        {{ Auth::user()->nama }}
+                                                    </div>
+                                                </div>
+                                            </h6>
+                                            <h6>
+                                                <div class="row">
+                                                    <div class="col s2">
+                                                        Email
+                                                    </div>
+                                                    <div class="col s1">
+                                                        :
+                                                    </div>
+                                                    <div class="col s8">
+                                                        {{ Auth::user()->email }}
+                                                    </div>
+                                                </div>
+                                            </h6>
+                                            <h6>
+                                                <div class="row">
+                                                    <div class="col s2">
+                                                        NIK
+                                                    </div>
+                                                    <div class="col s1">
+                                                        :
+                                                    </div>
+                                                    <div class="col s8">
+                                                        {{ Auth::user()->nik }}
+                                                    </div>
+                                                </div>
+                                            </h6>
 
                                         </div>
                                     </div>
@@ -116,7 +153,7 @@ Profile
                         </div>
                     </div>
                     <!-- Today Highlight -->
-                    <div class="col s12 m12 l3 hide-on-med-and-down">
+                    {{-- <div class="col s12 m12 l3 hide-on-med-and-down">
                         <div class="row mt-5">
                             <div class="col s12">
                                 <h6>Tanda Tangan</h6>
@@ -136,7 +173,7 @@ Profile
                         <br>
                         <br>
                         <br>
-                    </div>
+                    </div> --}}
                 </div>
             </div><!-- START RIGHT SIDEBAR NAV -->
 

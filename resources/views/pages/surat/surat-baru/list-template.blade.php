@@ -45,27 +45,33 @@
                                             <thead>
                                                 <tr>
                                                     <th>Nama Template</th>
-                                                    <th>Jenis</th>
+                                                    <th>Klasifikasi</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($template as $tp)
                                                 <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
+                                                    <td>{{ $tp->nama_template }}</td>
+                                                    <td style="text-transform: uppercase">{{ $tp->klasifikasi }}</td>
                                                     <td>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <a class="mb-6 btn-floating waves-effect waves-light gradient-45deg-amber-amber" title="preview">
-                                                                    <i class="material-icons">print</i>
-                                                                </a>
+                                                                <form action="{{ url('/template-surat/template-approval/preview') }}" method="post" target="_blank">
+                                                                    @csrf
+                                                                    <input type="hidden" name="id_template" value="{{ $tp->id_template }}">
+                                                                    <button type="submit" class="btn-floating waves-effect waves-light gradient-45deg-amber-amber" title="preview">
+                                                                        <i class="material-icons">visibility</i>
+                                                                    </button>
+                                                                </form>
                                                             </div>
                                                             <div class="col">
-                                                                <a href="{{url('surat-baru/surat-template/tambah-surat')}}" class="waves-effect waves-light btn-small">Buat Surat</a>
+                                                                <a href="{{url('surat-baru/surat-template/'.$tp->id_template.'/pengajuan-nomor')}}" class="waves-effect waves-light btn-small">Buat Surat</a>
                                                             </div>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                @endforeach
 
                                             </tbody>
                                         </table>

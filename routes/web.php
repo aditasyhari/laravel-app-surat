@@ -24,9 +24,7 @@ use App\Http\Controllers\ArsipSuratKeluarController;
 Route::post('post-login', [AuthController::class, 'postLogin']);
 
 Route::middleware('auth')->group(function() {
-    Route::get('/', function () {
-        return view('pages.dashboard');
-    });
+    Route::get('/', [UserController::class, 'dashboard']);
 
     // surat baru
     Route::get('surat-baru', function () {
@@ -36,14 +34,13 @@ Route::middleware('auth')->group(function() {
     Route::get('surat-baru/non-template', [SuratController::class, 'pengajuanNomor']);
     Route::post('surat-baru/non-template', [SuratController::class, 'pengajuanNomor']);
     Route::get('surat-baru/non-template/buat', [SuratController::class, 'suratNonTemplate'])->name('surat-nontemplate');
-    Route::post('surat-baru/non-template/buat', [SuratController::class, 'buatSuratNonTemplate']);
-
-    Route::get('surat-baru/surat-template', function () {
-        return view('pages.surat.surat-baru.template');
-    });
-    Route::get('surat-baru/surat-template/tambah-surat', function () {
-        return view('pages.surat.surat-baru.buatsuratbaru');
-    });
+    Route::post('surat-baru/non-template/buat', [SuratController::class, 'buatSurat']);
+    
+    Route::get('surat-baru/surat-template', [SuratController::class, 'listTemplate']);
+    Route::get('surat-baru/surat-template/buat', [SuratController::class, 'suratTemplate'])->name('surat-template');
+    Route::post('surat-baru/surat-template/buat', [SuratController::class, 'buatSurat']);
+    Route::get('surat-baru/surat-template/{id}/pengajuan-nomor', [SuratController::class, 'pengajuanNomorTemplate']);
+    Route::post('surat-baru/surat-template/{id}/pengajuan-nomor', [SuratController::class, 'pengajuanNomorTemplate']);
     // end surat baru
 
     // surat masuk

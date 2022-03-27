@@ -7,6 +7,7 @@ use App\Models\SuratKeluar;
 use App\Models\Klasifikasi;
 use Illuminate\Http\Request;
 use App\Models\ArsipSuratMasuk;
+use App\Models\Template;
 use Carbon\Carbon;
 use Auth;
 use Str;
@@ -84,6 +85,59 @@ class SuratController extends Controller
         }
     }
 
+    public function pengajuanNomorTemplate(Request $request, $id)
+    {
+        try {
+            if($request->isMethod('get')) {
+                $template = Template::from('template as t')->select('id_template', 'nama_template', 'k.nama as klasifikasi', 'k.kode as kode_klasifikasi')
+                        ->leftJoin('klasifikasi as k', 'k.id_klasifikasi', '=', 't.id_klasifikasi')
+                        ->where('id_template', $id)
+                        ->first();
+                
+                $user = User::select('id_user', 'nama', 'ttd')->where('role', 'user')->get();
+
+                return view('pages.surat.surat-baru.pengajuan-nomor-template', compact(['template', 'user']));
+            } else {    
+                $param = [
+                    'kode' => $request->kode_klasifikasi,
+                    'tgl_surat_fisik' => $request->tgl_surat_fisik,
+                ];
+
+                $nomor = nomorSurat($param);
+                $validator = User::select('nama')->find($request->id_validator);
+                // $ttd = User::select('nama')->find($request->id_ttd);
+
+                $pengajuan = [
+                    'nomor_surat' => $nomor['nomor_surat'],
+                    'tgl_surat_fisik' => $request->tgl_surat_fisik,
+                    'kode_klasifikasi' => $request->kode_klasifikasi,
+                    'nama_klasifikasi' => $request->nama_klasifikasi,
+                    'id_pembuat' => Auth::user()->id_user,
+                    'id_validator' => $request->id_validator,
+                    // 'id_ttd' => $request->id_ttd,
+                    // 'nama_ttd' => $ttd->nama,
+                    'nama_validator' => $validator->nama,
+                ];
+
+                return redirect()->route('surat-template', ['pengajuan' => $pengajuan, 'id_template' => $id]);
+            }
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
+    public function suratTemplate(Request $request)
+    {
+        try {
+            $template = Template::find($request->id_template);
+            $pengajuan = $request->pengajuan;
+
+            return view('pages.surat.surat-baru.buatsurat-template', compact(['pengajuan', 'template']));
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
     public function suratNonTemplate(Request $request)
     {
         try {
@@ -95,7 +149,22 @@ class SuratController extends Controller
         }
     }
 
-    public function buatSuratNonTemplate(Request $request)
+    public function listTemplate()
+    {
+        try {
+            $template = Template::from('template as t')->select('id_template', 'nama_template', 'k.nama as klasifikasi', 'k.kode as kode_klasifikasi')
+                        ->leftJoin('klasifikasi as k', 'k.id_klasifikasi', '=', 't.id_klasifikasi')
+                        ->where('status_template', 'disetujui')
+                        ->orderBy('nama_template', 'asc')
+                        ->get();
+
+            return view('pages.surat.surat-baru.list-template', compact('template'));
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
+    public function buatSurat(Request $request)
     {
         try {
             $req = $request->except(['pengajuan']);
