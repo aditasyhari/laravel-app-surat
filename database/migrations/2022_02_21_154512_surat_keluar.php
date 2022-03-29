@@ -19,6 +19,7 @@ class SuratKeluar extends Migration
             $table->date('tgl_surat_fisik');
             $table->string('kode_klasifikasi');
             $table->string('klasifikasi');
+            $table->string('perihal');
             $table->string('tujuan_surat');
             $table->string('email_tujuan');
             $table->string('ukuran_hal');
