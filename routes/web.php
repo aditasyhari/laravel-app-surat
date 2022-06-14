@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function() {
 
     // generate pdf
     Route::post('template-surat/preview', [PdfController::class, 'previewTemplate']);
+    Route::put('template-surat/preview', [PdfController::class, 'previewTemplate']);
     Route::post('surat-keluar/preview', [PdfController::class, 'preview']);
     Route::put('surat-keluar/preview', [PdfController::class, 'preview']);
     Route::post('surat-keluar/lihat-surat-pdf', [PdfController::class, 'lihatPdf']);
