@@ -42,6 +42,21 @@
 
     @include('layout.script')
 
+    @if($message = Session::get('error'))
+    <script>
+        swal({
+            icon: 'error',
+            title: '{{ $message }}',
+            showConfirmButton: false,
+            timer: 3000,
+            customClass: {
+                confirmButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        });
+    </script>
+    @endif
+
     @stack('js')
 </body>
 

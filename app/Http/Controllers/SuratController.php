@@ -249,19 +249,23 @@ class SuratController extends Controller
     public function submitValidasiSk(Request $request)
     {
         try {
-            $sk = SuratKeluar::find($request->id_surat_keluar);
-            $status_surat = $request->status_surat;
-
-            $update = [
-                'status_surat' => $status_surat,
-                'revisi' => ""
-            ];
-
-            if($status_surat == 'revisi') {
-                $update['revisi'] = $request->revisi;
+            if($request->status_surat) {
+                $sk = SuratKeluar::find($request->id_surat_keluar);
+                $status_surat = $request->status_surat;
+    
+                $update = [
+                    'status_surat' => $status_surat,
+                    'revisi' => ""
+                ];
+    
+                if($status_surat == 'revisi') {
+                    $update['revisi'] = $request->revisi;
+                }
+    
+                $sk->update($update);
+            } else {
+                return back()->with('error', 'Pilih jenis validasi surat terlebih dahulu !');
             }
-
-            $sk->update($update);
 
             return redirect('validasi-sk')->with('status', 'Berhasil validasi surat.');
         } catch (Exception $e) {

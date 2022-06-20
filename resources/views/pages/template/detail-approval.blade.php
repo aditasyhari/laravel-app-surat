@@ -114,7 +114,7 @@
                                                 <textarea name="revisi" class="materialize-textarea" required>isi revisi</textarea>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn waves-effect green">Submit</button>
+                                        <button type="submit" id="btn-submit" class="btn waves-effect green" disabled>Submit</button>
                                     </form>
                                     <div class="mb-20"></div>
                                     <div class="row">
@@ -146,6 +146,10 @@
     document.getElementById('status_template').addEventListener('change', function () {
         var style = this.value == 'revisi' ? 'block' : 'none';
         document.getElementById('revisi').style.display = style;
+    });
+
+    $("#status_template").on('change', function() {
+        $("#btn-submit").removeAttr("disabled");
     });
 </script>
 @endpush

@@ -117,8 +117,12 @@ class TemplateSuratController extends Controller
     public function approval(Request $request)
     {
         try {
-            $template = Template::find($request->id_template);
-            $template->update($request->except(['id_template']));
+            if($request->status_template) {
+                $template = Template::find($request->id_template);
+                $template->update($request->except(['id_template']));
+            } else {
+                return back()->with('error', 'Pilih jenis validasi terlebih dahulu !');
+            }
 
             return redirect('/template-surat/template-approval');
         } catch (Exception $e) {
