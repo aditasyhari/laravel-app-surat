@@ -19,9 +19,15 @@ class UserController extends Controller
     public function dashboard()
     {
         $total_anggota = User::where('role', '!=', 'admin')->count();
-        $total_sk = SuratKeluar::where('id_pembuat', Auth::user()->id_user)->count();
-        $total_sm = ArsipSuratMasuk::where('id_user', Auth::user()->id_user)->count();
+        if(Auth::user()->role = 'admin') {
+            $total_sk = SuratKeluar::count();
+            $total_sm = ArsipSuratMasuk::count();
+        } else {
+            $total_sk = SuratKeluar::where('id_pembuat', Auth::user()->id_user)->count();
+            $total_sm = ArsipSuratMasuk::where('id_user', Auth::user()->id_user)->count();
+        }
         $total_template = Template::where('status_template', 'disetujui')->count();
+
         return view('pages.dashboard', compact(['total_anggota', 'total_template', 'total_sk', 'total_sm']));
     }
 
