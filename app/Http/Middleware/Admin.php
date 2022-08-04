@@ -21,6 +21,6 @@ class Admin
             return $next($request);
         }
 
-        return redirect('login');
+        return back()->with('error', 'Tidak ada akses');
     }
 }

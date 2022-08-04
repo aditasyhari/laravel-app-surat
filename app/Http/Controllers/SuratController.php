@@ -8,6 +8,7 @@ use App\Models\Klasifikasi;
 use Illuminate\Http\Request;
 use App\Models\ArsipSuratMasuk;
 use App\Models\Template;
+use App\Models\Disposisi;
 use Carbon\Carbon;
 use Auth;
 use Str;
@@ -20,8 +21,17 @@ class SuratController extends Controller
         if(Auth::user()->role == 'admin') {
             $sm = ArsipSuratMasuk::orderBy('read', 'asc')->orderBy('created_at', 'desc')->get();
         } else {
-            $sm = ArsipSuratMasuk::where('id_user', Auth::user()->id_user)->orderBy('read', 'asc')->orderBy('created_at', 'desc')->get();
+            $disposisi = Disposisi::select('arsip_sm.*')
+                        ->join('arsip_sm', 'arsip_sm.id_arsip_sm', '=', 'disposisi.id_arsip_sm')
+                        ->where('id_user_tujuan', Auth::user()->id_user);
+            $sm = ArsipSuratMasuk::where('id_user', Auth::user()->id_user)
+                    ->union($disposisi)
+                    ->orderBy('read', 'asc')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
         }
+
+        // dd($disposisi->get());
 
         return view('pages.surat.surat-masuk.suratmasuk', compact('sm'));
     }
@@ -41,7 +51,53 @@ class SuratController extends Controller
     {
         try {
             $sm = ArsipSuratMasuk::find($id);
+            if(Auth::user()->role == 'user') {
+                $user = User::where('role', '!=', 'admin')->where('id_user', '!=', Auth::user()->id_user)->get();
+                $userDisposisi = Disposisi::join('user', 'user.id_user', '=', 'disposisi.id_user_tujuan')
+                                ->where('id_arsip_sm', $id)
+                                ->where('id_user_dari', Auth::user()->id_user);
+
+                if($userDisposisi->count()) {
+                    $dataTujuan = $userDisposisi->first();
+                    $status = "Surat sudah disposisi ke $dataTujuan->nama";
+                } else {
+                    $status = "";
+                }
+
+                if($sm->id_user != Auth::user()->id_user) {
+                    $disposisi = 1;
+                } else {
+                    $disposisi = 0;
+                }
+
+                return view('pages.surat.surat-masuk.detail', compact(['sm', 'user', 'status', 'disposisi']));
+            }
+
             return view('pages.surat.surat-masuk.detail', compact('sm'));
+        } catch (Exception $e) {
+            return view('error.500');
+        }
+    }
+
+    public function disposisiSm(Request $request, $id)
+    {
+        try {
+            $id_user_dari = Auth::user()->id_user;
+            $id_user_tujuan = $request->id_user;
+
+            $disposisi = Disposisi::where('id_arsip_sm', $id)->where('id_user_dari', $id_user_tujuan)->count();
+            if($disposisi) {
+                $user = User::find($id_user_tujuan);
+                return back()->with('error', "Tidak dapat disposisi surat ke $user->nama");
+            }
+
+            Disposisi::create([
+                'id_arsip_sm' => $id,
+                'id_user_dari' => $id_user_dari,
+                'id_user_tujuan' => $id_user_tujuan
+            ]);
+
+            return back();
         } catch (Exception $e) {
             return view('error.500');
         }

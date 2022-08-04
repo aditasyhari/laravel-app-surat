@@ -38,7 +38,7 @@
         </a>
     </li> -->
 
-    <li class="active bold">
+    <li class="bold">
         <a class="collapsible-header waves-effect waves-cyan {{ (request()->is('template-surat*')) ? 'active' : '' }}">
             <i class="material-icons">description</i>
             <span class="menu-title" data-i18n="">Template Surat</span>
@@ -62,7 +62,8 @@
         </div>
     </li>
 
-    <li class="active bold">
+    @if(Auth::user()->role != 'user')
+    <li class="bold">
         <a class="collapsible-header waves-effect waves-cyan {{ (request()->is('arsip-surat*')) ? 'active' : '' }}" href="#">
             <i class="material-icons">storage</i>
             <span class="menu-title" data-i18n="">Arsip Surat</span>
@@ -85,7 +86,6 @@
             </ul>
         </div>
     </li>
-    @if(Auth::user()->role == 'admin')
     <li class="bold">
         <a class="waves-effect waves-cyan {{ (request()->is('klasifikasi*')) ? 'active' : '' }}" href="{{url('klasifikasi')}}">
             <i class="material-icons">attachment</i><span class="menu-title" data-i18n="">Klasifikasi</span>

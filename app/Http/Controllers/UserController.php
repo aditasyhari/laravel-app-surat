@@ -9,6 +9,7 @@ use App\Models\Template;
 use App\Models\SuratKeluar;
 use App\Models\ArsipSuratKeluar;
 use App\Models\ArsipSuratMasuk;
+use App\Models\Disposisi;
 use Exception;
 use File;
 use Auth;
@@ -19,12 +20,17 @@ class UserController extends Controller
     public function dashboard()
     {
         $total_anggota = User::where('role', '!=', 'admin')->count();
-        if(Auth::user()->role = 'admin') {
+        if(Auth::user()->role == 'admin') {
             $total_sk = SuratKeluar::count();
             $total_sm = ArsipSuratMasuk::count();
         } else {
             $total_sk = SuratKeluar::where('id_pembuat', Auth::user()->id_user)->count();
-            $total_sm = ArsipSuratMasuk::where('id_user', Auth::user()->id_user)->count();
+            $disposisi = Disposisi::select('arsip_sm.*')
+                        ->join('arsip_sm', 'arsip_sm.id_arsip_sm', '=', 'disposisi.id_arsip_sm')
+                        ->where('id_user_tujuan', Auth::user()->id_user);
+            $total_sm = ArsipSuratMasuk::where('id_user', Auth::user()->id_user)
+                    ->union($disposisi)
+                    ->count();
         }
         $total_template = Template::where('status_template', 'disetujui')->count();
 

@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function() {
     // surat masuk
     Route::get('surat-masuk', [SuratController::class, 'suratMasuk']);
     Route::get('surat-masuk/detail-surat/{id}', [SuratController::class, 'detailSm']);
+    Route::post('surat-masuk/detail-surat/{id}/disposisi', [SuratController::class, 'disposisiSm']);
 
     // surat keluar
     Route::get('surat-keluar', [SuratController::class, 'suratKeluar']);
