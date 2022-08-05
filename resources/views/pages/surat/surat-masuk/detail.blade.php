@@ -50,7 +50,7 @@
                                     @endif
                                     <div class="row">
                                         <div class="col s12 m6 l10">
-                                            <h4 class="card-title">Detail Surat Masuk @if($disposisi) | <span style="color: green;">Disposisi</span> @endif</h4>
+                                            <h4 class="card-title">Detail Surat Masuk @if(isset($disposisi) && $disposisi) | <span style="color: green;">Disposisi</span> @endif</h4>
                                         </div>
                                         <div class="col s12 m6 l2">
                                         </div>
