@@ -59,7 +59,7 @@
                                                     <th>Nama</th>
                                                     <th>Nik</th>
                                                     <th>Email</th>
-                                                    <th>TTD</th>
+                                                    <!-- <th>TTD</th> -->
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -72,9 +72,9 @@
                                                     <td>{{ $u->nama }}</td>
                                                     <td>{{ $u->nik }}</td>
                                                     <td>{{ $u->email }}</td>
-                                                    <td>
+                                                    <!-- <td>
                                                         <img class="img-table" src="{{ asset('image/ttd/'.$u->ttd) }}" alt="-">
-                                                    </td>
+                                                    </td> -->
                                                     <td>
                                                         <div class="row">
                                                             <div class="col s3">

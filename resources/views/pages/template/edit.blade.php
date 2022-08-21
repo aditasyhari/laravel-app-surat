@@ -195,7 +195,7 @@
                                                     <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('tglsurat')">Tgl Surat</button>
                                                     <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('tujuan')">Tujuan</button>
                                                     <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('emailtujuan')">Email Tujuan</button>
-                                                    <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('ttd')">TTD</button>
+                                                    <!-- <button type="button" class="btn btn-small mbm-5 waves-effect" onclick="variabel('ttd')">TTD</button> -->
                                                 </div>
                                             </div>
 
