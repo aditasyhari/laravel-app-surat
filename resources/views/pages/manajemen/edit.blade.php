@@ -86,7 +86,7 @@
                                                 <img class="img-input" src="{{ asset('image/profile/'.$user->foto) }}" alt="-">
                                             </div>
 
-                                            <div class="input-field col s12">
+                                            <!-- <div class="input-field col s12">
                                                 <label for="ttd">Tanda Tangan (abaikan jika tidak mengganti ttd)</label>
                                                 <br>
                                             </div>
@@ -95,7 +95,7 @@
                                             </div>
                                             <div class="input-field col s6">
                                                 <img class="img-input" src="{{ asset('image/ttd/'.$user->ttd) }}" alt="-">
-                                            </div>
+                                            </div> -->
 
                                             <div class="input-field col s12">
                                                 <button class="btn waves-effect waves-light right" type="submit"

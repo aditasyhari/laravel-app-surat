@@ -75,11 +75,11 @@
                                                 <input type="file" id="input-file-now" name="foto" class="dropify" data-default-file="" accept="image/*" />
                                             </div>
 
-                                            <div class="input-field col s12">
+                                            <!-- <div class="input-field col s12">
                                                 <label for="ttd">Tanda Tangan</label>
                                                 <br><br>
                                                 <input type="file" id="input-file-now" name="ttd" class="dropify" data-default-file="" accept="image/*" />
-                                            </div>
+                                            </div> -->
 
                                             <div class="input-field col s12">
                                                 <button class="btn waves-effect waves-light right" type="submit"
