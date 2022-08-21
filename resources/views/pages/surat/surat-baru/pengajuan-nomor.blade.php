@@ -60,7 +60,7 @@
 
                                             <div class="col s12">
                                                 <label for="role">Validator Surat*</label>
-                                                <select class="error validate" id="id_ttd" name="id_validator" aria-required="true" required>
+                                                <select class="error validate" id="id_validator" name="id_validator" aria-required="true" required>
                                                     <option disabled selected>Pilih
                                                     </option>
                                                     @foreach($user as $u)

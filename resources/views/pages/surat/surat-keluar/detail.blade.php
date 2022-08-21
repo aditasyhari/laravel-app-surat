@@ -103,13 +103,13 @@
                                             <h6>{{ $sk->ukuran_hal }}</h6>
                                         </div>
                                         <div class="col s3 mb-20">
-                                            <label for="perihal">Ukuran TTD</label>
-                                            <h6>{{ $sk->ukuran_ttd }}</h6>
-                                        </div>
-                                        <div class="col s3 mb-20">
                                             <label for="perihal">Orientasi Halaman</label>
                                             <h6>{{ $sk->orientasi_hal }}</h6>
                                         </div>
+                                        <!-- <div class="col s3 mb-20">
+                                            <label for="perihal">Ukuran TTD</label>
+                                            <h6>{{ $sk->ukuran_ttd }}</h6>
+                                        </div> -->
                                     </div>
                                     <div class="row">
                                         <div class="col s3 mb-20">

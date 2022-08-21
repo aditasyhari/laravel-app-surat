@@ -83,13 +83,13 @@ Buat Surat Baru
                                                     value="nama_validator">
                                             </div>
 
-                                            <div class="input-field col s6">
+                                            <!-- <div class="input-field col s6">
                                                 <label for="status">Persetujuan TTD*</label>
                                                 <input name="id_validator" type="hidden"
                                                     value="id_ttd">
                                                 <input class="validate" readonly aria-required="true" type="text"
                                                     value="nama_ttd">
-                                            </div>
+                                            </div> -->
 
                                             <div class="input-field col s12">
                                                 <label for="tujuan">Tujuan Surat*</label>
