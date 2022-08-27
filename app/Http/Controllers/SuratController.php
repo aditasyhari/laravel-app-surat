@@ -320,7 +320,7 @@ class SuratController extends Controller
                     $update['revisi'] = $request->revisi;
                 }
     
-                // $sk->update($update);
+                $sk->update($update);
 
                 if($status_surat == 'disetujui') {
                     try {
