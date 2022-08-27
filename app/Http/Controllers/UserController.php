@@ -52,6 +52,21 @@ class UserController extends Controller
         }
     }
 
+    public function updateValidator(Request $request, $id_user)
+    {
+        try {
+            $validator = $request->validator_data;
+            $user = User::find($id_user);
+            $user->update([
+                'validator' => $validator
+            ]);
+
+            return response()->json(['message' => 'success'], 200);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'error'], 500);
+        }
+    }
+
     public function tambahData(Request $request)
     {
         try {

@@ -10,6 +10,8 @@ use App\Models\ArsipSuratMasuk;
 use App\Models\Template;
 use App\Models\Disposisi;
 use Carbon\Carbon;
+use PDF;
+use Mail;
 use Auth;
 use Str;
 
@@ -108,7 +110,7 @@ class SuratController extends Controller
         try {
             if($request->isMethod('get')) {
                 $klasifikasi = Klasifikasi::orderBy('nama', 'asc')->get();
-                $user = User::select('id_user', 'nama', 'ttd')->where('role', 'user')->get();
+                $user = User::select('id_user', 'nama', 'ttd')->where('role', 'user')->where('validator', 1)->get();
                 return view('pages.surat.surat-baru.pengajuan-nomor', compact(['klasifikasi', 'user']));
             } else {    
                 $klasifikasi = Klasifikasi::find($request->id_klasifikasi);
@@ -150,7 +152,7 @@ class SuratController extends Controller
                         ->where('id_template', $id)
                         ->first();
                 
-                $user = User::select('id_user', 'nama', 'ttd')->where('role', 'user')->get();
+                $user = User::select('id_user', 'nama', 'ttd')->where('role', 'user')->where('validator', 1)->get();
 
                 return view('pages.surat.surat-baru.pengajuan-nomor-template', compact(['template', 'user']));
             } else {    
@@ -318,7 +320,33 @@ class SuratController extends Controller
                     $update['revisi'] = $request->revisi;
                 }
     
-                $sk->update($update);
+                // $sk->update($update);
+
+                if($status_surat == 'disetujui') {
+                    try {
+                        $data = [
+                            'email_tujuan' => $sk->email_tujuan,
+                            'title' => $sk->nomor_surat.' - '.$sk->perihal,
+                            'nomor_surat' => $sk->nomor_surat,
+                            'm_atas' => $sk->m_atas,
+                            'm_bawah' => $sk->m_bawah,
+                            'm_kanan' => $sk->m_kanan,
+                            'm_kiri' => $sk->m_kiri,
+                            'layout_kop' => $sk->layout_kop,
+                            'layout_konten' => $sk->layout_konten
+                        ];
+    
+                        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pdf.show', $data)->setPaper($sk->ukuran_hal, $sk->orientasi_hal);
+      
+                        Mail::send('email.notif', $data, function($message) use ($data, $pdf) {
+                            $message->to($data["email_tujuan"])
+                                    ->subject($data["title"])
+                                    ->attachData($pdf->output(), $data['nomor_surat'].'.pdf');
+                        });
+                    } catch (Exception $err) {
+
+                    }
+                }
             } else {
                 return back()->with('error', 'Pilih jenis validasi surat terlebih dahulu !');
             }

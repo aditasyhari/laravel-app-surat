@@ -59,7 +59,7 @@
                                                     <th>Nama</th>
                                                     <th>Nik</th>
                                                     <th>Email</th>
-                                                    <!-- <th>TTD</th> -->
+                                                    <th>Validator</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -72,9 +72,16 @@
                                                     <td>{{ $u->nama }}</td>
                                                     <td>{{ $u->nik }}</td>
                                                     <td>{{ $u->email }}</td>
-                                                    <!-- <td>
-                                                        <img class="img-table" src="{{ asset('image/ttd/'.$u->ttd) }}" alt="-">
-                                                    </td> -->
+                                                    <td>
+                                                        <div class="switch">
+                                                            <label>
+                                                            Tidak
+                                                            <input data-id="{{ $u->id_user }}" class="toggleValidator" type="checkbox" {{ $u->validator ? 'checked' : '' }}>
+                                                            <span class="lever"></span>
+                                                            Ya
+                                                            </label>
+                                                        </div>
+                                                    </td>
                                                     <td>
                                                         <div class="row">
                                                             <div class="col s3">
@@ -134,5 +141,28 @@
             }
           });
       });
+</script>
+
+<script>
+    $('.toggleValidator').change(function() {
+        var status = $(this).prop('checked') == true ? 1 : 0; 
+        var user_id = $(this).data('id'); 
+        var url = '/manajemen-anggota/update-validator/'+user_id;
+
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {validator_data: status},
+            success: function (result) {
+                console.log('success update validator');
+            }
+        });
+    });
 </script>
 @endpush

@@ -96,6 +96,7 @@ Route::middleware('auth')->group(function() {
     Route::middleware('admin')->group(function() {
         // manajemen anggota
         Route::get('manajemen-anggota', [UserController::class, 'index']);
+        Route::post('manajemen-anggota/update-validator/{id_user}', [UserController::class, 'updateValidator']);
         Route::get('manajemen-anggota/tambah-anggota', [UserController::class, 'tambah']);
         Route::get('manajemen-anggota/edit-anggota/{id}', [UserController::class, 'edit']);
         Route::post('manajemen-anggota/tambah-anggota', [UserController::class, 'tambahData']);

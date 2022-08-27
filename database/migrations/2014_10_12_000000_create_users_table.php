@@ -25,6 +25,7 @@ return new class extends Migration
             $table->enum('role', ['user', 'admin'])->default('user');
             $table->string('ttd')->nullable();
             $table->string('foto')->nullable();
+            $table->boolean('validator')->default(false);
             $table->timestamps();
         });
     }

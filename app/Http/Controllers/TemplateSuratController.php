@@ -32,7 +32,7 @@ class TemplateSuratController extends Controller
     {
         try {
             if($request->isMethod('get')) {
-                $validator = User::select('id_user', 'nama')->get();
+                $validator = User::select('id_user', 'nama', 'role')->where('role', 'admin')->get();
                 $klasifikasi = Klasifikasi::select('id_klasifikasi', 'nama')->get();
     
                 return view('pages.template.tambah', compact(['validator', 'klasifikasi']));
